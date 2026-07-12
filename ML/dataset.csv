@@ -1,0 +1,251 @@
+nilai,tingkat_kesulitan,jam_belajar,kehadiran,gaya_belajar,rekomendasi
+44,Mudah,3,Baik,Visual,Program Remedial Intensif
+47,Sulit,1,Kurang,Kinestetik,Program Remedial Intensif
+99,Mudah,5,Cukup,Visual,Program Pengayaan
+33,Mudah,2,Baik,Kinestetik,Program Remedial Intensif
+33,Sulit,2,Kurang,Kinestetik,Program Remedial Intensif
+99,Sedang,2,Cukup,Kinestetik,Program Pengayaan
+65,Mudah,2,Kurang,Auditori,Program Remedial Intensif
+73,Sedang,2,Baik,Auditori,Pendampingan Akademik
+43,Mudah,4,Baik,Auditori,Program Remedial Intensif
+74,Sulit,3,Baik,Kinestetik,Pendampingan Akademik
+88,Sulit,1,Cukup,Visual,Pendampingan Akademik
+100,Sedang,5,Cukup,Kinestetik,Program Pengayaan
+54,Sulit,1,Baik,Kinestetik,Program Remedial Intensif
+59,Sedang,1,Baik,Visual,Program Remedial Intensif
+78,Sedang,4,Kurang,Auditori,Program Remedial Intensif
+50,Sedang,3,Baik,Kinestetik,Program Remedial Intensif
+64,Sulit,1,Kurang,Kinestetik,Program Remedial Intensif
+51,Sulit,2,Baik,Auditori,Program Remedial Intensif
+78,Sedang,5,Baik,Kinestetik,Pendampingan Akademik
+71,Mudah,2,Baik,Auditori,Pendampingan Akademik
+81,Sedang,1,Baik,Kinestetik,Program Reguler
+70,Mudah,4,Cukup,Kinestetik,Pendampingan Akademik
+88,Mudah,3,Baik,Visual,Program Pengayaan
+98,Sedang,5,Cukup,Kinestetik,Program Pengayaan
+81,Sedang,2,Baik,Kinestetik,Program Reguler
+93,Mudah,1,Baik,Visual,Program Pengayaan
+50,Sulit,4,Kurang,Visual,Program Remedial Intensif
+79,Sedang,5,Cukup,Kinestetik,Pendampingan Akademik
+62,Sulit,1,Kurang,Kinestetik,Program Remedial Intensif
+44,Sulit,5,Cukup,Kinestetik,Program Remedial Intensif
+73,Mudah,3,Cukup,Visual,Pendampingan Akademik
+88,Mudah,3,Kurang,Visual,Program Remedial Intensif
+94,Mudah,3,Kurang,Kinestetik,Program Remedial Intensif
+55,Mudah,3,Baik,Kinestetik,Program Remedial Intensif
+97,Mudah,5,Cukup,Auditori,Program Pengayaan
+32,Mudah,3,Cukup,Visual,Program Remedial Intensif
+37,Mudah,5,Baik,Visual,Program Remedial Intensif
+92,Mudah,5,Baik,Visual,Program Pengayaan
+90,Sulit,2,Cukup,Kinestetik,Pendampingan Akademik
+84,Mudah,5,Kurang,Kinestetik,Program Remedial Intensif
+55,Sulit,3,Cukup,Kinestetik,Program Remedial Intensif
+77,Sedang,5,Cukup,Visual,Pendampingan Akademik
+61,Mudah,1,Cukup,Visual,Pendampingan Akademik
+100,Mudah,5,Baik,Visual,Program Pengayaan
+39,Sulit,1,Baik,Visual,Program Remedial Intensif
+34,Sedang,1,Kurang,Visual,Program Remedial Intensif
+65,Sulit,4,Baik,Kinestetik,Program Remedial Intensif
+46,Sulit,5,Kurang,Auditori,Program Remedial Intensif
+61,Sedang,4,Baik,Visual,Pendampingan Akademik
+42,Sulit,4,Cukup,Auditori,Program Remedial Intensif
+82,Sedang,1,Kurang,Kinestetik,Program Remedial Intensif
+42,Mudah,4,Kurang,Auditori,Program Remedial Intensif
+43,Mudah,2,Baik,Kinestetik,Program Remedial Intensif
+87,Mudah,4,Baik,Auditori,Program Pengayaan
+89,Mudah,1,Cukup,Kinestetik,Program Pengayaan
+42,Mudah,5,Baik,Visual,Program Remedial Intensif
+60,Mudah,4,Cukup,Auditori,Pendampingan Akademik
+57,Sedang,1,Baik,Auditori,Program Remedial Intensif
+30,Sedang,3,Cukup,Auditori,Program Remedial Intensif
+84,Sulit,5,Kurang,Kinestetik,Program Remedial Intensif
+92,Mudah,2,Cukup,Visual,Program Pengayaan
+37,Sulit,5,Baik,Kinestetik,Program Remedial Intensif
+70,Mudah,1,Kurang,Auditori,Program Remedial Intensif
+94,Sulit,2,Baik,Kinestetik,Pendampingan Akademik
+40,Mudah,1,Kurang,Visual,Program Remedial Intensif
+60,Sedang,1,Kurang,Visual,Program Remedial Intensif
+35,Sulit,1,Cukup,Kinestetik,Program Remedial Intensif
+96,Sedang,3,Baik,Kinestetik,Program Pengayaan
+70,Mudah,3,Cukup,Visual,Pendampingan Akademik
+68,Sedang,3,Baik,Visual,Pendampingan Akademik
+88,Sulit,5,Baik,Visual,Program Pengayaan
+98,Mudah,5,Cukup,Visual,Program Pengayaan
+74,Mudah,2,Cukup,Auditori,Pendampingan Akademik
+50,Sedang,5,Kurang,Auditori,Program Remedial Intensif
+97,Mudah,5,Cukup,Kinestetik,Program Pengayaan
+43,Mudah,3,Baik,Visual,Program Remedial Intensif
+100,Mudah,3,Cukup,Kinestetik,Program Pengayaan
+56,Sulit,3,Baik,Kinestetik,Program Remedial Intensif
+63,Sulit,4,Cukup,Visual,Program Remedial Intensif
+41,Sulit,4,Cukup,Visual,Program Remedial Intensif
+30,Sedang,2,Kurang,Auditori,Program Remedial Intensif
+50,Sulit,4,Kurang,Kinestetik,Program Remedial Intensif
+84,Sulit,1,Baik,Visual,Pendampingan Akademik
+49,Sulit,1,Cukup,Kinestetik,Program Remedial Intensif
+100,Mudah,4,Baik,Visual,Program Pengayaan
+69,Sedang,1,Cukup,Visual,Pendampingan Akademik
+61,Sulit,1,Cukup,Kinestetik,Program Remedial Intensif
+82,Sulit,2,Baik,Visual,Pendampingan Akademik
+52,Sedang,1,Baik,Kinestetik,Program Remedial Intensif
+72,Sedang,2,Cukup,Visual,Pendampingan Akademik
+43,Sedang,1,Cukup,Visual,Program Remedial Intensif
+55,Sedang,3,Cukup,Visual,Program Remedial Intensif
+58,Mudah,2,Cukup,Auditori,Program Remedial Intensif
+65,Mudah,3,Cukup,Kinestetik,Pendampingan Akademik
+95,Sedang,5,Cukup,Visual,Program Pengayaan
+44,Sedang,2,Kurang,Auditori,Program Remedial Intensif
+34,Mudah,5,Cukup,Auditori,Program Remedial Intensif
+70,Sedang,5,Kurang,Visual,Program Remedial Intensif
+79,Sulit,2,Cukup,Visual,Pendampingan Akademik
+85,Mudah,5,Kurang,Kinestetik,Program Remedial Intensif
+55,Sedang,4,Baik,Kinestetik,Program Remedial Intensif
+72,Sulit,3,Kurang,Visual,Program Remedial Intensif
+68,Sulit,3,Kurang,Auditori,Program Remedial Intensif
+71,Sedang,3,Kurang,Visual,Program Remedial Intensif
+54,Sedang,4,Kurang,Kinestetik,Program Remedial Intensif
+52,Sulit,5,Cukup,Auditori,Program Remedial Intensif
+100,Mudah,3,Cukup,Visual,Program Pengayaan
+85,Sulit,5,Kurang,Auditori,Program Remedial Intensif
+89,Sedang,4,Kurang,Visual,Program Remedial Intensif
+95,Sedang,2,Kurang,Visual,Program Remedial Intensif
+66,Sulit,5,Cukup,Visual,Program Remedial Intensif
+60,Sulit,3,Baik,Visual,Program Remedial Intensif
+48,Mudah,1,Baik,Auditori,Program Remedial Intensif
+39,Sedang,4,Kurang,Kinestetik,Program Remedial Intensif
+54,Sulit,4,Cukup,Auditori,Program Remedial Intensif
+61,Mudah,1,Baik,Auditori,Pendampingan Akademik
+58,Mudah,5,Cukup,Visual,Program Remedial Intensif
+61,Mudah,4,Baik,Auditori,Pendampingan Akademik
+97,Sulit,5,Cukup,Auditori,Program Pengayaan
+94,Sedang,5,Cukup,Visual,Program Pengayaan
+90,Sedang,3,Baik,Kinestetik,Program Pengayaan
+65,Sulit,4,Kurang,Visual,Program Remedial Intensif
+65,Sedang,1,Kurang,Auditori,Program Remedial Intensif
+60,Sedang,3,Cukup,Kinestetik,Pendampingan Akademik
+40,Mudah,2,Baik,Auditori,Program Remedial Intensif
+49,Sulit,2,Baik,Auditori,Program Remedial Intensif
+82,Sedang,5,Cukup,Auditori,Program Reguler
+37,Mudah,4,Cukup,Kinestetik,Program Remedial Intensif
+32,Sulit,4,Cukup,Visual,Program Remedial Intensif
+75,Sedang,4,Cukup,Kinestetik,Pendampingan Akademik
+99,Sulit,2,Cukup,Visual,Pendampingan Akademik
+64,Sedang,4,Baik,Auditori,Pendampingan Akademik
+73,Sulit,4,Kurang,Visual,Program Remedial Intensif
+89,Mudah,5,Kurang,Visual,Program Remedial Intensif
+80,Sulit,5,Kurang,Visual,Program Remedial Intensif
+40,Sulit,4,Baik,Auditori,Program Remedial Intensif
+53,Mudah,3,Cukup,Auditori,Program Remedial Intensif
+57,Sedang,3,Cukup,Auditori,Program Remedial Intensif
+65,Sedang,3,Baik,Auditori,Pendampingan Akademik
+32,Sulit,5,Baik,Auditori,Program Remedial Intensif
+58,Sulit,1,Kurang,Visual,Program Remedial Intensif
+33,Mudah,2,Baik,Kinestetik,Program Remedial Intensif
+49,Mudah,2,Cukup,Kinestetik,Program Remedial Intensif
+44,Sulit,2,Cukup,Kinestetik,Program Remedial Intensif
+62,Sedang,2,Kurang,Kinestetik,Program Remedial Intensif
+44,Mudah,3,Baik,Kinestetik,Program Remedial Intensif
+33,Sedang,5,Kurang,Auditori,Program Remedial Intensif
+80,Sulit,2,Baik,Kinestetik,Pendampingan Akademik
+61,Mudah,3,Kurang,Kinestetik,Program Remedial Intensif
+45,Sulit,1,Cukup,Kinestetik,Program Remedial Intensif
+84,Sulit,3,Baik,Kinestetik,Program Reguler
+73,Mudah,4,Cukup,Visual,Pendampingan Akademik
+85,Sedang,4,Kurang,Visual,Program Remedial Intensif
+85,Mudah,5,Kurang,Auditori,Program Remedial Intensif
+98,Sedang,4,Cukup,Kinestetik,Program Pengayaan
+64,Sedang,2,Baik,Auditori,Pendampingan Akademik
+87,Mudah,4,Kurang,Kinestetik,Program Remedial Intensif
+78,Sedang,1,Cukup,Auditori,Pendampingan Akademik
+53,Sedang,2,Cukup,Auditori,Program Remedial Intensif
+73,Sedang,5,Kurang,Auditori,Program Remedial Intensif
+31,Sulit,2,Baik,Visual,Program Remedial Intensif
+82,Sedang,5,Baik,Kinestetik,Program Reguler
+90,Sulit,4,Cukup,Visual,Program Pengayaan
+41,Sedang,2,Cukup,Kinestetik,Program Remedial Intensif
+61,Sedang,5,Cukup,Auditori,Pendampingan Akademik
+100,Sulit,3,Cukup,Kinestetik,Program Pengayaan
+100,Sedang,3,Kurang,Auditori,Program Remedial Intensif
+64,Sedang,3,Baik,Visual,Pendampingan Akademik
+54,Sedang,1,Kurang,Kinestetik,Program Remedial Intensif
+53,Mudah,2,Kurang,Auditori,Program Remedial Intensif
+65,Sulit,5,Kurang,Kinestetik,Program Remedial Intensif
+66,Mudah,2,Cukup,Visual,Pendampingan Akademik
+76,Mudah,3,Baik,Kinestetik,Pendampingan Akademik
+98,Mudah,3,Baik,Visual,Program Pengayaan
+100,Sedang,2,Kurang,Auditori,Program Remedial Intensif
+43,Mudah,5,Cukup,Auditori,Program Remedial Intensif
+91,Sedang,3,Baik,Visual,Program Pengayaan
+62,Sedang,1,Baik,Auditori,Pendampingan Akademik
+92,Mudah,5,Kurang,Kinestetik,Program Remedial Intensif
+36,Mudah,2,Kurang,Auditori,Program Remedial Intensif
+40,Mudah,1,Kurang,Auditori,Program Remedial Intensif
+58,Sulit,4,Cukup,Auditori,Program Remedial Intensif
+68,Sulit,4,Cukup,Kinestetik,Program Remedial Intensif
+37,Sulit,1,Baik,Kinestetik,Program Remedial Intensif
+57,Sedang,1,Baik,Visual,Program Remedial Intensif
+52,Sulit,1,Baik,Visual,Program Remedial Intensif
+82,Sedang,5,Cukup,Auditori,Program Reguler
+34,Mudah,3,Kurang,Auditori,Program Remedial Intensif
+88,Mudah,2,Cukup,Kinestetik,Program Pengayaan
+55,Sedang,1,Kurang,Visual,Program Remedial Intensif
+49,Sedang,2,Baik,Visual,Program Remedial Intensif
+51,Sedang,5,Kurang,Kinestetik,Program Remedial Intensif
+66,Sedang,1,Cukup,Kinestetik,Pendampingan Akademik
+68,Sulit,4,Cukup,Kinestetik,Program Remedial Intensif
+99,Sedang,4,Baik,Kinestetik,Program Pengayaan
+35,Sedang,3,Kurang,Auditori,Program Remedial Intensif
+33,Mudah,2,Kurang,Kinestetik,Program Remedial Intensif
+32,Sulit,3,Kurang,Visual,Program Remedial Intensif
+52,Sedang,5,Kurang,Auditori,Program Remedial Intensif
+65,Mudah,5,Cukup,Kinestetik,Pendampingan Akademik
+92,Mudah,4,Cukup,Auditori,Program Pengayaan
+72,Sedang,1,Baik,Auditori,Pendampingan Akademik
+82,Sulit,4,Cukup,Kinestetik,Program Reguler
+81,Sulit,1,Cukup,Visual,Pendampingan Akademik
+70,Sedang,3,Baik,Auditori,Pendampingan Akademik
+95,Mudah,5,Cukup,Auditori,Program Pengayaan
+36,Mudah,5,Cukup,Kinestetik,Program Remedial Intensif
+93,Sulit,4,Baik,Visual,Program Pengayaan
+64,Sulit,2,Cukup,Auditori,Program Remedial Intensif
+92,Mudah,1,Kurang,Kinestetik,Program Remedial Intensif
+60,Sulit,2,Cukup,Kinestetik,Program Remedial Intensif
+31,Sulit,4,Baik,Visual,Program Remedial Intensif
+44,Sedang,1,Kurang,Visual,Program Remedial Intensif
+93,Sulit,3,Kurang,Kinestetik,Program Remedial Intensif
+64,Sedang,4,Cukup,Visual,Pendampingan Akademik
+88,Sulit,2,Cukup,Visual,Pendampingan Akademik
+95,Sulit,2,Baik,Auditori,Pendampingan Akademik
+83,Sedang,5,Cukup,Visual,Program Reguler
+66,Sulit,3,Kurang,Kinestetik,Program Remedial Intensif
+92,Mudah,4,Kurang,Auditori,Program Remedial Intensif
+74,Sedang,5,Kurang,Auditori,Program Remedial Intensif
+88,Sedang,2,Kurang,Visual,Program Remedial Intensif
+79,Mudah,4,Baik,Auditori,Pendampingan Akademik
+90,Sulit,4,Cukup,Kinestetik,Program Pengayaan
+49,Sedang,1,Baik,Kinestetik,Program Remedial Intensif
+72,Mudah,4,Baik,Kinestetik,Pendampingan Akademik
+88,Mudah,2,Cukup,Kinestetik,Program Pengayaan
+49,Mudah,4,Cukup,Auditori,Program Remedial Intensif
+80,Sulit,1,Cukup,Kinestetik,Pendampingan Akademik
+98,Sedang,3,Kurang,Kinestetik,Program Remedial Intensif
+92,Sulit,1,Kurang,Visual,Program Remedial Intensif
+60,Sulit,3,Baik,Kinestetik,Program Remedial Intensif
+41,Sedang,1,Kurang,Kinestetik,Program Remedial Intensif
+42,Sedang,2,Kurang,Auditori,Program Remedial Intensif
+33,Mudah,3,Baik,Auditori,Program Remedial Intensif
+75,Sedang,4,Baik,Visual,Pendampingan Akademik
+97,Sedang,5,Kurang,Visual,Program Remedial Intensif
+51,Mudah,1,Kurang,Auditori,Program Remedial Intensif
+60,Sedang,5,Baik,Visual,Pendampingan Akademik
+89,Sulit,3,Cukup,Auditori,Program Pengayaan
+31,Sedang,3,Kurang,Kinestetik,Program Remedial Intensif
+50,Mudah,4,Cukup,Kinestetik,Program Remedial Intensif
+68,Sulit,4,Kurang,Auditori,Program Remedial Intensif
+88,Sedang,2,Cukup,Auditori,Program Pengayaan
+43,Mudah,4,Kurang,Auditori,Program Remedial Intensif
+67,Sulit,3,Baik,Kinestetik,Program Remedial Intensif
+80,Sedang,1,Kurang,Kinestetik,Program Remedial Intensif
+36,Sulit,4,Cukup,Visual,Program Remedial Intensif
+75,Mudah,2,Kurang,Auditori,Program Remedial Intensif
+47,Sulit,1,Kurang,Kinestetik,Program Remedial Intensif
