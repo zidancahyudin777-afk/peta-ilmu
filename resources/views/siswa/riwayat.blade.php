@@ -116,16 +116,16 @@
                 <thead>
                     <tr class="table-light text-secondary" style="font-size:13px; font-weight:600;">
                         <th>Tanggal</th>
-                        <th>Mata Pelajaran</th>
-                        <th>Nilai</th>
+                        <th>Program Belajar</th>
+                        <th>Nilai Rata-rata</th>
                         <th>Tingkat Kesulitan</th>
-                        <th>Kategori Rekomendasi</th>
+                        <th>Hasil Rekomendasi</th>
                         <th>Confidence</th>
-                        <th class="text-center">Detail</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody style="font-size:13.5px; color:#4a5568;">
-                    @forelse ($learningData as $data)
+                    @foreach ($learningData as $data)
                         <tr>
                             {{-- Tanggal --}}
                             <td class="text-nowrap" style="font-size:12.5px; color:#64748b;">
@@ -134,16 +134,16 @@
                                     : ($data->created_at ? $data->created_at->translatedFormat('d M Y, H:i') : '-') }}
                             </td>
 
-                            {{-- Mata Pelajaran --}}
+                            {{-- Program Belajar --}}
                             <td class="fw-semibold text-dark">
                                 <i class="fas fa-book-open me-1" style="color:#2563eb; font-size:12px;"></i>
                                 {{ $data->mata_pelajaran }}
                             </td>
 
-                            {{-- Nilai --}}
+                            {{-- Nilai Rerata --}}
                             <td>
                                 <span class="fw-bold {{ $data->nilai >= 80 ? 'text-success' : ($data->nilai >= 60 ? 'text-warning' : 'text-danger') }}">
-                                    {{ $data->nilai }}
+                                    {{ number_format($data->nilai, 1) }}
                                 </span>
                             </td>
 
@@ -159,21 +159,17 @@
 
                             {{-- Kategori Rekomendasi --}}
                             <td>
-                                @if ($data->recommendation_result === 'Program Remedial Intensif')
+                                @if ($data->recommendation_result === 'Program Remedial Intensif' || $data->recommendation_result === 'Dasar')
                                     <span class="badge-kategori badge-remedial">
-                                        <i class="fas fa-exclamation-triangle me-1"></i>Program Remedial Intensif
+                                        <i class="fas fa-exclamation-triangle me-1"></i>Dasar
                                     </span>
-                                @elseif ($data->recommendation_result === 'Pendampingan Akademik')
+                                @elseif ($data->recommendation_result === 'Pendampingan Akademik' || $data->recommendation_result === 'Menengah' || $data->recommendation_result === 'Program Reguler')
                                     <span class="badge-kategori badge-pendampingan">
-                                        <i class="fas fa-hands-helping me-1"></i>Pendampingan Akademik
+                                        <i class="fas fa-hands-helping me-1"></i>Menengah
                                     </span>
-                                @elseif ($data->recommendation_result === 'Program Reguler')
-                                    <span class="badge-kategori badge-reguler">
-                                        <i class="fas fa-book-open me-1"></i>Program Reguler
-                                    </span>
-                                @elseif ($data->recommendation_result === 'Program Pengayaan')
+                                @elseif ($data->recommendation_result === 'Program Pengayaan' || $data->recommendation_result === 'Mahir')
                                     <span class="badge-kategori badge-pengayaan">
-                                        <i class="fas fa-star me-1"></i>Program Pengayaan
+                                        <i class="fas fa-star me-1"></i>Mahir
                                     </span>
                                 @else
                                     <span class="badge bg-secondary-subtle text-secondary" style="font-size:12px;">
@@ -185,7 +181,7 @@
                             {{-- Confidence --}}
                             <td>
                                 @if ($data->confidence)
-                                    <span class="fw-semibold text-dark">{{ number_format($data->confidence, 1) }}%</span>
+                                    <span class="fw-semibold text-dark">{{ number_format($data->confidence, 2) }}%</span>
                                 @else
                                     <span class="text-muted">-</span>
                                 @endif
@@ -198,17 +194,7 @@
                                 </a>
                             </td>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="7" class="text-center py-5 text-muted">
-                                <i class="fas fa-inbox fa-3x mb-3 d-block" style="color:#cbd5e0;"></i>
-                                <p class="mb-2">Belum ada riwayat prediksi.</p>
-                                <a href="{{ route('siswa.input') }}" class="btn-primary-custom">
-                                    <i class="fas fa-plus me-1"></i> Input Data Sekarang
-                                </a>
-                            </td>
-                        </tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
         </div>

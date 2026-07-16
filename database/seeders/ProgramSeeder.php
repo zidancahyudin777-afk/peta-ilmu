@@ -50,7 +50,7 @@ class ProgramSeeder extends Seeder
 
         $pkgSdPrivLocal = ProgramPackage::create([
             'program_id' => $sd->id,
-            'package_type' => 'Kelas Private - Petung/Girimukti',
+            'package_type' => 'Private - Petung/Girimukti',
             'description' => '1 Siswa : 1 Guru (Guru datang ke rumah)',
             'package_icon' => 'fas fa-home',
             'info' => '',
@@ -62,7 +62,7 @@ class ProgramSeeder extends Seeder
 
         $pkgSdPrivOut = ProgramPackage::create([
             'program_id' => $sd->id,
-            'package_type' => 'Kelas Private - Luar Petung/Girimukti',
+            'package_type' => 'Private - Luar Petung/Giri',
             'description' => '1 Siswa : 1 Guru (Guru datang ke rumah)',
             'package_icon' => 'fas fa-car',
             'info' => '',
@@ -102,7 +102,7 @@ class ProgramSeeder extends Seeder
 
         $pkgSmpPrivLocal = ProgramPackage::create([
             'program_id' => $smp->id,
-            'package_type' => 'Kelas Private - Petung/Girimukti',
+            'package_type' => 'Private - Petung/Girimukti',
             'description' => '1 Siswa : 1 Guru (Guru datang ke rumah)',
             'package_icon' => 'fas fa-home',
             'info' => '',
@@ -114,7 +114,7 @@ class ProgramSeeder extends Seeder
 
         $pkgSmpPrivOut = ProgramPackage::create([
             'program_id' => $smp->id,
-            'package_type' => 'Kelas Private - Luar Petung/Girimukti',
+            'package_type' => 'Private - Luar Petung/Giri',
             'description' => '1 Siswa : 1 Guru (Guru datang ke rumah)',
             'package_icon' => 'fas fa-car',
             'info' => '',
@@ -154,7 +154,7 @@ class ProgramSeeder extends Seeder
 
         $pkgSmaPrivLocal = ProgramPackage::create([
             'program_id' => $sma->id,
-            'package_type' => 'Kelas Private - Petung/Girimukti',
+            'package_type' => 'Private - Petung/Girimukti',
             'description' => '1 Siswa : 1 Guru (Guru datang ke rumah)',
             'package_icon' => 'fas fa-home',
             'info' => '',
@@ -166,7 +166,7 @@ class ProgramSeeder extends Seeder
 
         $pkgSmaPrivOut = ProgramPackage::create([
             'program_id' => $sma->id,
-            'package_type' => 'Kelas Private - Luar Petung/Girimukti',
+            'package_type' => 'Private - Luar Petung/Giri',
             'description' => '1 Siswa : 1 Guru (Guru datang ke rumah)',
             'package_icon' => 'fas fa-car',
             'info' => '',

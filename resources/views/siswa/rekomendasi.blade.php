@@ -260,7 +260,7 @@
         <div class="stat-row">
             <div class="stat-card">
                 <div class="stat-label">Confidence Score</div>
-                <div class="stat-value">{{ $record->confidence ? number_format($record->confidence, 1) . '%' : '-' }}</div>
+                <div class="stat-value">{{ $record->confidence ? number_format($record->confidence, 2) . '%' : '-' }}</div>
                 @if ($record->confidence)
                     <div class="confidence-bar-wrap">
                         <div class="confidence-bar">
@@ -278,8 +278,8 @@
                 <div class="stat-value" style="font-size:15px;">{{ $record->study_frequency ?? '-' }}</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Durasi Belajar</div>
-                <div class="stat-value" style="font-size:15px;">{{ $record->study_duration ?? '-' }}</div>
+                <div class="stat-label font-bold text-primary">Durasi Rekomendasi</div>
+                <div class="stat-value" style="font-size:15px;">{{ $record->study_duration_rec ?? '-' }}</div>
             </div>
             <div class="stat-card">
                 <div class="stat-label">Prioritas Belajar</div>
@@ -289,31 +289,43 @@
 
         {{-- Data Siswa --}}
         <div class="section-block">
-            <h5><i class="fas fa-user-graduate"></i> Data Siswa</h5>
+            <h5><i class="fas fa-user-graduate"></i> Rincian Nilai & Aktivitas Siswa</h5>
             <div class="data-grid">
                 <div class="data-item">
                     <div class="data-label">Nama Siswa</div>
                     <div class="data-val">{{ auth()->user()->name }}</div>
                 </div>
                 <div class="data-item">
-                    <div class="data-label">Mata Pelajaran</div>
+                    <div class="data-label">Program Belajar</div>
                     <div class="data-val">{{ $record->mata_pelajaran }}</div>
                 </div>
                 <div class="data-item">
-                    <div class="data-label">Nilai</div>
+                    <div class="data-label">Rata-rata Nilai</div>
                     <div class="data-val">
                         <span class="fw-bold {{ $record->nilai >= 80 ? 'text-success' : ($record->nilai >= 60 ? 'text-warning' : 'text-danger') }}">
-                            {{ $record->nilai }}
+                            {{ number_format($record->nilai, 1) }}
                         </span> / 100
                     </div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">Nilai Tugas</div>
+                    <div class="data-val">{{ $record->nilai_tugas ?? '-' }}</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">Nilai Kuis</div>
+                    <div class="data-val">{{ $record->nilai_kuis ?? '-' }}</div>
                 </div>
                 <div class="data-item">
                     <div class="data-label">Tingkat Kesulitan</div>
                     <div class="data-val">{{ $record->tingkat_kesulitan }}</div>
                 </div>
                 <div class="data-item">
-                    <div class="data-label">Gaya Belajar</div>
-                    <div class="data-val">{{ $record->gaya_belajar ?? '-' }}</div>
+                    <div class="data-label">Kehadiran Kelas</div>
+                    <div class="data-val">{{ $record->kehadiran ?? '-' }}</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">Belajar Mandiri</div>
+                    <div class="data-val">{{ $record->study_duration ? $record->study_duration . ' Jam/Hari' : '-' }}</div>
                 </div>
                 <div class="data-item">
                     <div class="data-label">Tanggal Prediksi</div>
@@ -343,7 +355,7 @@
             <div class="section-block">
                 <h5><i class="fas fa-book"></i> Materi yang Direkomendasikan</h5>
                 <p class="text-muted mb-3" style="font-size:13px;">
-                    Materi berikut dipilih berdasarkan mata pelajaran <strong>{{ $record->mata_pelajaran }}</strong>
+                    Materi berikut dipilih berdasarkan program belajar <strong>{{ $record->mata_pelajaran }}</strong>
                 </p>
                 <div class="materi-list">
                     @foreach ($record->recommended_materials as $materi)

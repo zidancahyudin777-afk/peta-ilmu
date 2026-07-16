@@ -10,9 +10,13 @@ class LearningData extends Model
 
     protected $fillable = [
         'user_id',
+        'program_id',
         'mata_pelajaran',
         'nilai',
+        'nilai_tugas',
+        'nilai_kuis',
         'tingkat_kesulitan',
+        'kehadiran',
         'gaya_belajar',
         'catatan',
         // Hasil prediksi Random Forest (dari Flask)
@@ -29,6 +33,7 @@ class LearningData extends Model
     ];
 
     protected $casts = [
+        'confidence' => 'double',
         'prediction_date' => 'datetime',
         'prediction_time' => 'datetime',
     ];
@@ -36,6 +41,11 @@ class LearningData extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function program()
+    {
+        return $this->belongsTo(Program::class, 'program_id');
     }
 
     /**
@@ -83,10 +93,10 @@ class LearningData extends Model
     public function getAlasanRekomendasiAttribute(): string
     {
         return match ($this->recommendation_result) {
-            'Program Remedial Intensif' => 'Nilai belajar dan pemahaman materi dasar menunjukkan performa yang membutuhkan perhatian ekstra, sehingga sistem merekomendasikan Program Remedial Intensif.',
-            'Pendampingan Akademik'     => 'Nilai belajar menunjukkan performa yang masih perlu ditingkatkan sehingga sistem merekomendasikan Pendampingan Akademik.',
+            'Program Remedial Intensif', 'Dasar' => 'Nilai belajar dan pemahaman materi dasar menunjukkan performa yang membutuhkan perhatian ekstra, sehingga sistem merekomendasikan tingkat Dasar / Remedial.',
+            'Pendampingan Akademik', 'Menengah' => 'Nilai belajar menunjukkan performa yang masih perlu ditingkatkan sehingga sistem merekomendasikan tingkat Menengah / Pendampingan.',
             'Program Reguler'           => 'Nilai belajar menunjukkan performa stabil dan baik sehingga sistem merekomendasikan Program Reguler.',
-            'Program Pengayaan'         => 'Hasil belajar menunjukkan performa yang sangat baik sehingga sistem merekomendasikan Program Pengayaan.',
+            'Program Pengayaan', 'Mahir' => 'Hasil belajar menunjukkan performa yang sangat baik sehingga sistem merekomendasikan tingkat Mahir / Pengayaan.',
             default                     => 'Data belajar belum dianalisis oleh sistem.',
         };
     }
@@ -107,8 +117,8 @@ class LearningData extends Model
     public static function buildPersonalization(?string $category): ?array
     {
         return match ($category) {
-            'Program Remedial Intensif' => [
-                'tingkat'      => 'Sangat Tinggi',
+            'Program Remedial Intensif', 'Dasar' => [
+                'tingkat'      => 'Dasar',
                 'warna'        => 'Merah',
                 'warna_hex'    => '#dc2626',
                 'warna_bg'     => '#fee2e2',
@@ -116,8 +126,8 @@ class LearningData extends Model
                 'warna_border' => '#fca5a5',
                 'icon'         => 'fas fa-exclamation-triangle',
             ],
-            'Pendampingan Akademik' => [
-                'tingkat'      => 'Tinggi',
+            'Pendampingan Akademik', 'Menengah' => [
+                'tingkat'      => 'Menengah',
                 'warna'        => 'Oranye',
                 'warna_hex'    => '#ea580c',
                 'warna_bg'     => '#ffedd5',
@@ -134,8 +144,8 @@ class LearningData extends Model
                 'warna_border' => '#93c5fd',
                 'icon'         => 'fas fa-book-open',
             ],
-            'Program Pengayaan' => [
-                'tingkat'      => 'Pengembangan',
+            'Program Pengayaan', 'Mahir' => [
+                'tingkat'      => 'Mahir',
                 'warna'        => 'Hijau',
                 'warna_hex'    => '#16a34a',
                 'warna_bg'     => '#dcfce7',

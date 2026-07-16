@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('learning_data', function (Blueprint $table) {
-            $table->string('recommendation_result')->nullable()->after('catatan');
-            $table->double('confidence')->nullable()->after('recommendation_result');
-            $table->timestamp('prediction_time')->nullable()->after('confidence');
+            $table->enum('recommendation_result', ['Dasar', 'Menengah', 'Mahir', 'Program Remedial Intensif', 'Pendampingan Akademik', 'Program Reguler', 'Program Pengayaan', 'Menunggu Input Siswa'])->default('Menunggu Input Siswa')->after('catatan');
+            $table->decimal('confidence', 5, 2)->nullable()->after('recommendation_result');
+            $table->dateTime('prediction_time')->nullable()->after('confidence');
         });
     }
 

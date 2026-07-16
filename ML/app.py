@@ -42,49 +42,46 @@ def predict():
         return jsonify({'error': 'Invalid request: No JSON payload provided.'}), 400
 
     # Validate required parameters
-    required_params = ['nilai', 'tingkat_kesulitan', 'jam_belajar', 'kehadiran', 'gaya_belajar']
+    required_params = ['nilai_tugas', 'nilai_kuis', 'kehadiran', 'study_duration', 'tingkat_kesulitan']
     for param in required_params:
         if param not in data:
             return jsonify({'error': f'Missing parameter: {param}'}), 400
 
     try:
         # Extract features
-        nilai = float(data['nilai'])
-        tingkat_kesulitan = str(data['tingkat_kesulitan']).strip()
-        jam_belajar = float(data['jam_belajar'])
+        nilai_tugas = float(data['nilai_tugas'])
+        nilai_kuis = float(data['nilai_kuis'])
         kehadiran = str(data['kehadiran']).strip()
-        gaya_belajar = str(data['gaya_belajar']).strip()
+        study_duration = float(data['study_duration'])
+        tingkat_kesulitan = str(data['tingkat_kesulitan']).strip()
 
         # Validation ranges
-        if not (0 <= nilai <= 100):
-            return jsonify({'error': 'Parameter nilai harus berada di rentang 0 s.d 100.'}), 400
-        if not (1 <= jam_belajar <= 5):
-            return jsonify({'error': 'Parameter jam_belajar harus berada di rentang 1 s.d 5.'}), 400
+        if not (0 <= nilai_tugas <= 100):
+            return jsonify({'error': 'Parameter nilai_tugas harus berada di rentang 0 s.d 100.'}), 400
+        if not (0 <= nilai_kuis <= 100):
+            return jsonify({'error': 'Parameter nilai_kuis harus berada di rentang 0 s.d 100.'}), 400
+        if not (1 <= study_duration <= 5):
+            return jsonify({'error': 'Parameter study_duration harus berada di rentang 1 s.d 5.'}), 400
 
         # Check if categorical values are valid
         valid_kesulitan = label_encoders['tingkat_kesulitan'].categories_[0]
         valid_kehadiran = label_encoders['kehadiran'].categories_[0]
-        valid_gaya = label_encoders['gaya_belajar'].categories_[0]
 
         if tingkat_kesulitan not in valid_kesulitan:
             return jsonify({'error': f'Nilai tingkat_kesulitan tidak valid. Pilihan: {list(valid_kesulitan)}'}), 400
         if kehadiran not in valid_kehadiran:
             return jsonify({'error': f'Nilai kehadiran tidak valid. Pilihan: {list(valid_kehadiran)}'}), 400
-        if gaya_belajar not in valid_gaya:
-            return jsonify({'error': f'Nilai gaya_belajar tidak valid. Pilihan: {list(valid_gaya)}'}), 400
 
         # Encode categorical features
         encoded_kesulitan = label_encoders['tingkat_kesulitan'].transform(
             pd.DataFrame([[tingkat_kesulitan]], columns=['tingkat_kesulitan']))[0][0]
         encoded_kehadiran = label_encoders['kehadiran'].transform(
             pd.DataFrame([[kehadiran]], columns=['kehadiran']))[0][0]
-        encoded_gaya = label_encoders['gaya_belajar'].transform(
-            pd.DataFrame([[gaya_belajar]], columns=['gaya_belajar']))[0][0]
 
-        # Prepare feature vector
+        # Prepare feature vector (matches order and schema used during training)
         feature_df = pd.DataFrame(
-            [[nilai, encoded_kesulitan, jam_belajar, encoded_kehadiran, encoded_gaya]],
-            columns=['nilai', 'tingkat_kesulitan', 'jam_belajar', 'kehadiran', 'gaya_belajar']
+            [[nilai_tugas, nilai_kuis, encoded_kehadiran, study_duration, encoded_kesulitan]],
+            columns=['nilai_tugas', 'nilai_kuis', 'kehadiran', 'study_duration', 'tingkat_kesulitan']
         )
 
         # Perform prediction
@@ -100,7 +97,7 @@ def predict():
         total_requests += 1
         last_prediction_time = prediction_time
 
-        # Return ONLY prediction and confidence — all recommendation details built by Laravel
+        # Return prediction and confidence score
         return jsonify({
             'prediction': pred_label,
             'confidence': confidence
@@ -120,10 +117,9 @@ def health():
         'model': 'Random Forest',
         'version': '2.0',
         'categories': [
-            'Program Remedial Intensif',
-            'Pendampingan Akademik',
-            'Program Reguler',
-            'Program Pengayaan'
+            'Dasar',
+            'Menengah',
+            'Mahir'
         ],
         'total_requests': total_requests,
         'last_prediction_time': last_prediction_time

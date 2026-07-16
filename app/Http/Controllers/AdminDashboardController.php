@@ -89,18 +89,18 @@ class AdminDashboardController extends Controller
         // Machine Learning Stats
         $mlStats = [
             'total_predictions' => 0,
-            'program_reguler' => 0,
-            'program_intensif' => 0,
-            'pendampingan_intensif' => 0,
-            'avg_confidence' => 0
+            'dasar'             => 0,
+            'menengah'          => 0,
+            'mahir'             => 0,
+            'avg_confidence'    => 0
         ];
 
         $learningPreds = LearningData::whereNotNull('recommendation_result')->get();
         if ($learningPreds->isNotEmpty()) {
             $mlStats['total_predictions'] = $learningPreds->count();
-            $mlStats['program_reguler'] = $learningPreds->where('recommendation_result', 'Program Reguler')->count();
-            $mlStats['program_intensif'] = $learningPreds->where('recommendation_result', 'Program Intensif')->count();
-            $mlStats['pendampingan_intensif'] = $learningPreds->where('recommendation_result', 'Pendampingan Intensif')->count();
+            $mlStats['dasar'] = $learningPreds->filter(fn($r) => in_array($r->recommendation_result, ['Dasar', 'Program Remedial Intensif']))->count();
+            $mlStats['menengah'] = $learningPreds->filter(fn($r) => in_array($r->recommendation_result, ['Menengah', 'Pendampingan Akademik', 'Program Reguler']))->count();
+            $mlStats['mahir'] = $learningPreds->filter(fn($r) => in_array($r->recommendation_result, ['Mahir', 'Program Pengayaan']))->count();
             
             $confidences = $learningPreds->whereNotNull('confidence')->pluck('confidence')->toArray();
             if (count($confidences) > 0) {
@@ -137,11 +137,18 @@ class AdminDashboardController extends Controller
             // Flask is offline
         }
 
+        $students = [];
+        $hasil_belajar = [];
+        if ($section === 'hasil_belajar') {
+            $students = \App\Models\User::orderBy('name')->get();
+            $hasil_belajar = LearningData::with(['user', 'program'])->orderBy('created_at', 'desc')->get();
+        }
+
         return view('admin.dashboard', compact(
             'section', 'action', 'pendaftaran', 'programs', 'programData',
             'organisasi_info', 'misi_list', 'sejarah_paragraf', 'nilai_nilai',
             'struktur_organisasi', 'tim_pengajar', 'mata_pelajaran_filter', 'kontak_info',
-            'mlStats', 'flaskStatus'
+            'mlStats', 'flaskStatus', 'students', 'hasil_belajar'
         ));
     }
 
@@ -588,20 +595,19 @@ class AdminDashboardController extends Controller
     public function testPredict(Request $request)
     {
         $request->validate([
-            'nilai' => 'required|numeric|min:0|max:100',
-            'jam_belajar' => 'required|numeric|min:1|max:5',
+            'nilai_tugas' => 'required|numeric|min:0|max:100',
+            'nilai_kuis' => 'required|numeric|min:0|max:100',
+            'study_duration' => 'required|numeric|min:1|max:5',
             'tingkat_kesulitan' => 'required|string|in:Mudah,Sedang,Sulit',
             'kehadiran' => 'required|string|in:Baik,Cukup,Kurang',
-            'gaya_belajar' => 'required|string|in:Visual,Audio,Kinestetik',
         ]);
 
-        $gayaBelajarFlask = $request->input('gaya_belajar') === 'Audio' ? 'Auditori' : $request->input('gaya_belajar');
         $inputData = [
-            'nilai' => (float)$request->input('nilai'),
+            'nilai_tugas' => (float)$request->input('nilai_tugas'),
+            'nilai_kuis' => (float)$request->input('nilai_kuis'),
             'tingkat_kesulitan' => $request->input('tingkat_kesulitan'),
-            'jam_belajar' => (float)$request->input('jam_belajar'),
+            'study_duration' => (float)$request->input('study_duration'),
             'kehadiran' => $request->input('kehadiran'),
-            'gaya_belajar' => $gayaBelajarFlask,
         ];
 
         $startTime = microtime(true);
@@ -622,7 +628,6 @@ class AdminDashboardController extends Controller
                     'input' => $inputData,
                     'output' => $resData,
                     'confidence' => ($resData['confidence'] ?? '-') . '%',
-                    'prediction_time' => $resData['prediction_time'] ?? '-',
                     'response_time' => $responseTimeMs . ' ms'
                 ]);
 
@@ -657,5 +662,76 @@ class AdminDashboardController extends Controller
 
             return response()->json(['error' => 'Gagal terhubung ke Flask API: ' . $errorMsg], 500);
         }
+    }
+
+    public function addHasilBelajar(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'program_id' => 'required|exists:programs,id',
+            'nilai_tugas' => 'required|numeric|min:0|max:100',
+            'nilai_kuis' => 'required|numeric|min:0|max:100',
+            'kehadiran' => 'required|string|in:Baik,Cukup,Kurang',
+        ]);
+
+        $program = Program::findOrFail($request->input('program_id'));
+        $nilai = ($request->input('nilai_tugas') + $request->input('nilai_kuis')) / 2;
+
+        LearningData::create([
+            'user_id' => $request->input('user_id'),
+            'program_id' => $request->input('program_id'),
+            'mata_pelajaran' => $program->title,
+            'nilai_tugas' => $request->input('nilai_tugas'),
+            'nilai_kuis' => $request->input('nilai_kuis'),
+            'nilai' => $nilai,
+            'kehadiran' => $request->input('kehadiran'),
+            'tingkat_kesulitan' => 'Sedang', // default placeholder before student completes it
+            'recommendation_result' => 'Menunggu Input Siswa',
+        ]);
+
+        return redirect()->route('admin.dashboard', ['section' => 'hasil_belajar'])
+            ->with('success', 'Data hasil belajar berhasil ditambahkan! Siswa sekarang dapat melengkapi data untuk memicu rekomendasi.');
+    }
+
+    public function updateHasilBelajar(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:learning_data,id',
+            'user_id' => 'required|exists:users,id',
+            'program_id' => 'required|exists:programs,id',
+            'nilai_tugas' => 'required|numeric|min:0|max:100',
+            'nilai_kuis' => 'required|numeric|min:0|max:100',
+            'kehadiran' => 'required|string|in:Baik,Cukup,Kurang',
+        ]);
+
+        $record = LearningData::findOrFail($request->input('id'));
+        $program = Program::findOrFail($request->input('program_id'));
+        $nilai = ($request->input('nilai_tugas') + $request->input('nilai_kuis')) / 2;
+
+        $record->update([
+            'user_id' => $request->input('user_id'),
+            'program_id' => $request->input('program_id'),
+            'mata_pelajaran' => $program->title,
+            'nilai_tugas' => $request->input('nilai_tugas'),
+            'nilai_kuis' => $request->input('nilai_kuis'),
+            'nilai' => $nilai,
+            'kehadiran' => $request->input('kehadiran'),
+        ]);
+
+        return redirect()->route('admin.dashboard', ['section' => 'hasil_belajar'])
+            ->with('success', 'Data hasil belajar berhasil diperbarui!');
+    }
+
+    public function deleteHasilBelajar(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:learning_data,id',
+        ]);
+
+        $record = LearningData::findOrFail($request->input('id'));
+        $record->delete();
+
+        return redirect()->route('admin.dashboard', ['section' => 'hasil_belajar'])
+            ->with('success', 'Data hasil belajar berhasil dihapus!');
     }
 }

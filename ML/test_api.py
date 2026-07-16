@@ -3,43 +3,53 @@ import json
 
 url = 'http://127.0.0.1:5000/predict'
 
-# Test payloads: list of different student scenarios
+# Test payloads: list of different student scenarios matching the new blueprint
 test_cases = [
     {
-        "description": "Kasus 1: Nilai tinggi, kehadiran baik, kesulitan sedang (Harapan: Program Reguler)",
+        "description": "Kasus 1: Nilai tinggi, kehadiran baik (Harapan: Mahir)",
         "payload": {
-            "nilai": 85,
-            "tingkat_kesulitan": "Sedang",
-            "jam_belajar": 4,
+            "nilai_tugas": 90,
+            "nilai_kuis": 86,
             "kehadiran": "Baik",
-            "gaya_belajar": "Visual"
+            "study_duration": 4,
+            "tingkat_kesulitan": "Sedang"
         }
     },
     {
-        "description": "Kasus 2: Nilai sedang, kehadiran cukup, kesulitan sedang (Harapan: Program Intensif)",
+        "description": "Kasus 2: Nilai sedang, kehadiran cukup (Harapan: Menengah)",
         "payload": {
-            "nilai": 70,
-            "tingkat_kesulitan": "Sedang",
-            "jam_belajar": 3,
+            "nilai_tugas": 75,
+            "nilai_kuis": 71,
             "kehadiran": "Cukup",
-            "gaya_belajar": "Auditori"
+            "study_duration": 3,
+            "tingkat_kesulitan": "Sedang"
         }
     },
     {
-        "description": "Kasus 3: Nilai rendah, kehadiran kurang (Harapan: Pendampingan Intensif)",
+        "description": "Kasus 3: Nilai rendah, kehadiran kurang (Harapan: Dasar)",
         "payload": {
-            "nilai": 45,
-            "tingkat_kesulitan": "Sulit",
-            "jam_belajar": 1,
+            "nilai_tugas": 45,
+            "nilai_kuis": 41,
             "kehadiran": "Kurang",
-            "gaya_belajar": "Kinestetik"
+            "study_duration": 1,
+            "tingkat_kesulitan": "Sedang"
+        }
+    },
+    {
+        "description": "Kasus 4: Borderline - Nilai tinggi, kehadiran kurang (Harapan: Menengah)",
+        "payload": {
+            "nilai_tugas": 95,
+            "nilai_kuis": 91,
+            "kehadiran": "Kurang",
+            "study_duration": 2,
+            "tingkat_kesulitan": "Sedang"
         }
     }
 ]
 
 headers = {'Content-Type': 'application/json'}
 
-print("MEMULAI PENGUJIAN FLASK API:")
+print("MEMULAI PENGUJIAN FLASK API BARU:")
 print("="*60)
 
 for case in test_cases:
@@ -59,7 +69,6 @@ for case in test_cases:
             print(f"Error Respon: {response.text}")
     except Exception as e:
         print(f"Gagal menghubungi server Flask: {str(e)}")
-        print("Silakan jalankan Flask API terlebih dahulu dengan perintah: python ML/app.py")
         break
         
 print("\n" + "="*60)

@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('otp_code')->nullable();
-            $table->timestamp('otp_expires_at')->nullable();
+            $table->char('otp_code', 6)->nullable();
+            $table->dateTime('otp_expires_at')->nullable();
         });
     }
 

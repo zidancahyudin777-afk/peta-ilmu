@@ -43,6 +43,7 @@
                     <li><a href="{{ route('admin.dashboard', ['section' => 'profil']) }}" class="{{ $section == 'profil' ? 'active' : '' }}"><i class="fas fa-users"></i> Kelola Profil</a></li>
                     <li><a href="{{ route('admin.dashboard', ['section' => 'program']) }}" class="{{ $section == 'program' ? 'active' : '' }}"><i class="fas fa-book"></i> Kelola Program</a></li>
                     <li><a href="{{ route('admin.dashboard', ['section' => 'registration']) }}" class="{{ $section == 'registration' ? 'active' : '' }}"><i class="fas fa-users"></i> Kelola Pendaftaran</a></li>
+                    <li><a href="{{ route('admin.dashboard', ['section' => 'hasil_belajar']) }}" class="{{ $section == 'hasil_belajar' ? 'active' : '' }}"><i class="fas fa-graduation-cap"></i> Kelola Hasil Belajar</a></li>
                     <li><a href="{{ route('admin.dashboard', ['section' => 'ml']) }}" class="{{ $section == 'ml' ? 'active' : '' }}"><i class="fas fa-brain"></i> Machine Learning</a></li>
                     <li><a href="{{ route('admin.logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                 </ul>

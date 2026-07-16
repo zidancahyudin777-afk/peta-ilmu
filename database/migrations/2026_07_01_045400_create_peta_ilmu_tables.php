@@ -31,14 +31,14 @@ return new class extends Migration
         // 2. Programs
         if (!Schema::hasTable('programs')) {
             Schema::create('programs', function (Blueprint $table) {
-                $table->integer('id', true);
-                $table->string('program_code', 50)->unique();
+                $table->bigIncrements('id');
+                $table->string('program_code', 10)->unique();
                 $table->enum('category', ['sd', 'smp', 'sma']);
                 $table->string('icon', 100)->nullable();
-                $table->string('title', 255);
+                $table->string('title', 100);
                 $table->text('description')->nullable();
-                $table->string('duration', 100)->nullable();
-                $table->string('frequency', 100)->nullable();
+                $table->string('duration', 30)->nullable();
+                $table->string('frequency', 30)->nullable();
                 $table->json('subjects')->nullable();
                 $table->timestamp('created_at')->useCurrent();
                 $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
@@ -48,9 +48,9 @@ return new class extends Migration
         // 3. Program Features
         if (!Schema::hasTable('program_features')) {
             Schema::create('program_features', function (Blueprint $table) {
-                $table->integer('id', true);
-                $table->integer('program_id');
-                $table->text('feature_text');
+                $table->bigIncrements('id');
+                $table->unsignedBigInteger('program_id');
+                $table->string('feature_text', 150);
                 
                 $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             });
@@ -59,13 +59,13 @@ return new class extends Migration
         // 4. Program Packages
         if (!Schema::hasTable('program_packages')) {
             Schema::create('program_packages', function (Blueprint $table) {
-                $table->integer('id', true);
-                $table->integer('program_id');
-                $table->string('package_type', 100);
-                $table->text('description')->nullable();
-                $table->string('package_icon', 100)->nullable();
-                $table->text('info')->nullable();
-                $table->text('extra_info')->nullable();
+                $table->bigIncrements('id');
+                $table->unsignedBigInteger('program_id');
+                $table->string('package_type', 30);
+                $table->string('description', 150)->nullable();
+                $table->string('package_icon', 50)->nullable();
+                $table->string('info', 150)->nullable();
+                $table->string('extra_info', 150)->nullable();
 
                 $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             });
@@ -74,9 +74,9 @@ return new class extends Migration
         // 5. Package Prices
         if (!Schema::hasTable('package_prices')) {
             Schema::create('package_prices', function (Blueprint $table) {
-                $table->integer('id', true);
-                $table->integer('package_id');
-                $table->string('price_label', 50);
+                $table->bigIncrements('id');
+                $table->unsignedBigInteger('package_id');
+                $table->string('price_label', 30);
                 $table->decimal('price', 10, 2);
 
                 $table->foreign('package_id')->references('id')->on('program_packages')->onDelete('cascade');
@@ -120,25 +120,25 @@ return new class extends Migration
         // 8. Pendaftaran
         if (!Schema::hasTable('pendaftaran')) {
             Schema::create('pendaftaran', function (Blueprint $table) {
-                $table->integer('id', true);
-                $table->string('nama_lengkap', 255);
+                $table->bigIncrements('id');
+                $table->unsignedBigInteger('package_id')->nullable();
+                $table->string('nama_lengkap', 100);
                 $table->date('tanggal_lahir')->nullable();
                 $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
                 $table->text('alamat')->nullable();
-                $table->string('telepon', 20);
-                $table->string('email', 255)->nullable();
+                $table->string('telepon', 15);
+                $table->string('email', 100)->nullable();
                 $table->enum('jenjang', ['sd', 'smp', 'sma']);
-                $table->string('kelas', 50);
-                $table->string('sekolah', 255)->nullable();
-                $table->integer('package_id')->nullable();
-                $table->string('package_type', 100);
-                $table->string('durasi', 50);
-                $table->integer('jumlah_hari')->nullable();
-                $table->string('nama_ortu', 255);
-                $table->string('pekerjaan_ortu', 255)->nullable();
-                $table->string('telepon_ortu', 20);
+                $table->string('kelas', 10);
+                $table->string('sekolah', 100)->nullable();
+                $table->string('package_type', 30);
+                $table->string('durasi', 20);
+                $table->unsignedTinyInteger('jumlah_hari')->nullable();
+                $table->string('nama_ortu', 100);
+                $table->string('pekerjaan_ortu', 50)->nullable();
+                $table->string('telepon_ortu', 15);
                 $table->text('motivasi')->nullable();
-                $table->string('referensi', 255)->nullable();
+                $table->string('referensi', 100)->nullable();
                 $table->decimal('total_price', 10, 2);
                 $table->enum('status', ['pending', 'approved', 'rejected', 'completed'])->default('pending');
                 $table->timestamp('created_at')->useCurrent();
@@ -150,9 +150,9 @@ return new class extends Migration
         // 9. Registration Subjects
         if (!Schema::hasTable('registration_subjects')) {
             Schema::create('registration_subjects', function (Blueprint $table) {
-                $table->integer('id', true);
-                $table->integer('registration_id');
-                $table->string('subject_name', 255);
+                $table->bigIncrements('id');
+                $table->unsignedBigInteger('registration_id');
+                $table->string('subject_name', 50);
 
                 $table->foreign('registration_id')->references('id')->on('pendaftaran')->onDelete('cascade');
             });

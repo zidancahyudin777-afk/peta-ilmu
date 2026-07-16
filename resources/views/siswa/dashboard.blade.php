@@ -380,7 +380,7 @@
             <p>
                 Selamat datang di sistem <strong>Peta Ilmu</strong>. Gunakan fitur
                 <strong>Input Data Belajar</strong> untuk mendapatkan rekomendasi pembelajaran
-                terbaik yang disesuaikan dengan kemampuan dan gaya belajarmu.
+                terbaik yang disesuaikan dengan kemampuan dan keaktifan belajarmu.
             </p>
             <div class="bimbingan-tips">
                 <div class="bimbingan-tip">
@@ -422,7 +422,7 @@
                     <div class="d-flex flex-wrap gap-2 align-items-center mt-2">
                         @if($latestLearning->confidence)
                             <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1" style="font-weight: 600; font-size: 11px; border: 1px solid rgba(0,0,0,0.05);">
-                                Confidence: {{ number_format($latestLearning->confidence, 1) }}%
+                                Confidence: {{ number_format($latestLearning->confidence, 2) }}%
                             </span>
                             <span class="badge rounded-pill px-2.5 py-1" style="background-color: {{ $latestLearning->personalization['warna_bg'] ?? '#e0e7ff' }}; color: {{ $latestLearning->personalization['warna_text'] ?? '#3730a3' }}; font-weight: 600; font-size: 11px; border: 1px solid rgba(0,0,0,0.05);">
                                 Kepercayaan: {{ $latestLearning->tingkat_kepercayaan }}
@@ -492,7 +492,7 @@
             <div class="menu-card-icon"><i class="fas fa-brain"></i></div>
             <div class="menu-card-body">
                 <h5>Lihat Rekomendasi</h5>
-                <p>Dapatkan rekomendasi program belajar berbasis decision tree</p>
+                <p>Dapatkan rekomendasi program belajar berbasis Random Forest</p>
             </div>
             <i class="fas fa-chevron-right menu-card-arrow"></i>
         </a>

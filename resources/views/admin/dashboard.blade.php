@@ -560,9 +560,9 @@
 
             <div class="stat-card-custom">
                 <div class="stat-details">
-                    <h4>Program Reguler</h4>
-                    <div class="stat-number">{{ $mlStats['program_reguler'] }}</div>
-                    <div class="stat-desc">Rekomendasi reguler</div>
+                    <h4>Siswa Mahir</h4>
+                    <div class="stat-number">{{ $mlStats['mahir'] }}</div>
+                    <div class="stat-desc">Kategori kemampuan tinggi</div>
                 </div>
                 <div class="stat-icon-wrapper bg-green-light">
                     <i class="fas fa-check-circle"></i>
@@ -571,9 +571,9 @@
 
             <div class="stat-card-custom">
                 <div class="stat-details">
-                    <h4>Program Intensif</h4>
-                    <div class="stat-number">{{ $mlStats['program_intensif'] }}</div>
-                    <div class="stat-desc">Rekomendasi intensif</div>
+                    <h4>Siswa Menengah</h4>
+                    <div class="stat-number">{{ $mlStats['menengah'] }}</div>
+                    <div class="stat-desc">Kategori kemampuan sedang</div>
                 </div>
                 <div class="stat-icon-wrapper bg-orange-light">
                     <i class="fas fa-exclamation-circle"></i>
@@ -582,9 +582,9 @@
 
             <div class="stat-card-custom font-red-card" style="border-radius: 16px; border: 1px solid #e2e8f0; background: #ffffff; padding: 25px; display: flex; align-items: center; justify-content: space-between;">
                 <div class="stat-details">
-                    <h4 style="font-size: 0.85rem; color: #64748b; text-transform: uppercase; margin-bottom: 5px; font-weight: 600; letter-spacing: 0.5px;">Pendampingan Intensif</h4>
-                    <div class="stat-number" style="font-size: 2.2rem; font-weight: 700; color: #0f172a; line-height: 1.1;">{{ $mlStats['pendampingan_intensif'] }}</div>
-                    <div class="stat-desc" style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">Butuh penanganan tutor</div>
+                    <h4 style="font-size: 0.85rem; color: #64748b; text-transform: uppercase; margin-bottom: 5px; font-weight: 600; letter-spacing: 0.5px;">Siswa Dasar</h4>
+                    <div class="stat-number" style="font-size: 2.2rem; font-weight: 700; color: #0f172a; line-height: 1.1;">{{ $mlStats['dasar'] }}</div>
+                    <div class="stat-desc" style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">Butuh materi penguatan dasar</div>
                 </div>
                 <div class="stat-icon-wrapper" style="width: 60px; height: 60px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; background-color: #fef2f2; color: #dc2626;">
                     <i class="fas fa-hands-helping"></i>
@@ -694,13 +694,18 @@
                     <form id="apiTestForm" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="nilai" class="form-label" style="font-weight: 600; font-size: 13.5px; color: #4b5563;">Nilai Siswa (0 - 100)</label>
-                            <input type="number" class="form-control" id="nilai" name="nilai" min="0" max="100" placeholder="Contoh: 85" required style="padding: 10px; border-radius: 8px; border: 1px solid #d1d5db; width: 100%;">
+                            <label for="nilai_tugas" class="form-label" style="font-weight: 600; font-size: 13.5px; color: #4b5563;">Nilai Tugas (0 - 100)</label>
+                            <input type="number" class="form-control" id="nilai_tugas" name="nilai_tugas" min="0" max="100" placeholder="Contoh: 85" required style="padding: 10px; border-radius: 8px; border: 1px solid #d1d5db; width: 100%;">
                         </div>
 
                         <div class="mb-3">
-                            <label for="jam_belajar" class="form-label" style="font-weight: 600; font-size: 13.5px; color: #4b5563;">Jam Belajar Mandiri (1 - 5 jam)</label>
-                            <input type="number" class="form-control" id="jam_belajar" name="jam_belajar" min="1" max="5" placeholder="Contoh: 3" required style="padding: 10px; border-radius: 8px; border: 1px solid #d1d5db; width: 100%;">
+                            <label for="nilai_kuis" class="form-label" style="font-weight: 600; font-size: 13.5px; color: #4b5563;">Nilai Kuis (0 - 100)</label>
+                            <input type="number" class="form-control" id="nilai_kuis" name="nilai_kuis" min="0" max="100" placeholder="Contoh: 80" required style="padding: 10px; border-radius: 8px; border: 1px solid #d1d5db; width: 100%;">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="study_duration" class="form-label" style="font-weight: 600; font-size: 13.5px; color: #4b5563;">Durasi Belajar Mandiri (1 - 5 jam)</label>
+                            <input type="number" class="form-control" id="study_duration" name="study_duration" min="1" max="5" step="0.5" placeholder="Contoh: 3" required style="padding: 10px; border-radius: 8px; border: 1px solid #d1d5db; width: 100%;">
                         </div>
 
                         <div class="mb-3">
@@ -713,23 +718,13 @@
                             </select>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <label for="kehadiran" class="form-label" style="font-weight: 600; font-size: 13.5px; color: #4b5563;">Kehadiran Siswa</label>
                             <select class="form-select" id="kehadiran" name="kehadiran" required style="padding: 10px; border-radius: 8px; border: 1px solid #d1d5db; width: 100%;">
                                 <option value="">Pilih tingkat kehadiran</option>
                                 <option value="Baik">Baik</option>
                                 <option value="Cukup">Cukup</option>
                                 <option value="Kurang">Kurang</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="gaya_belajar" class="form-label" style="font-weight: 600; font-size: 13.5px; color: #4b5563;">Gaya Belajar</label>
-                            <select class="form-select" id="gaya_belajar" name="gaya_belajar" required style="padding: 10px; border-radius: 8px; border: 1px solid #d1d5db; width: 100%;">
-                                <option value="">Pilih tipe gaya belajar</option>
-                                <option value="Visual">Visual</option>
-                                <option value="Audio">Audio</option>
-                                <option value="Kinestetik">Kinestetik</option>
                             </select>
                         </div>
 
@@ -763,6 +758,204 @@
                         <pre id="jsonResult" class="bg-dark text-light p-3 rounded-3" style="font-size: 12px; font-family: 'Courier New', Courier, monospace; max-height: 420px; overflow-y: auto; line-height: 1.5; margin: 0;"></pre>
                     </div>
                 </div>
+            </div>
+        </div>
+
+    @elseif ($section == 'hasil_belajar')
+        <div class="content-section fade-in">
+            <div class="section-header">
+                <h3>Kelola Hasil Belajar</h3>
+            </div>
+            
+            <div class="section-body">
+                <!-- Form Tambah Hasil Belajar -->
+                <div class="dashboard-panel" style="margin-bottom: 30px;">
+                    <div class="panel-header-custom">
+                        <h3>Input Hasil Belajar Baru</h3>
+                        <span class="text-muted small">Kategori nilai tugas, nilai kuis, dan kehadiran diinput oleh Admin</span>
+                    </div>
+                    
+                    <form action="{{ route('admin.hasil_belajar.add') }}" method="POST">
+                        @csrf
+                        <div class="form-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+                            <div class="form-group">
+                                <label for="user_id" style="font-weight:600; font-size:13.5px; color:#4b5563;">Pilih Siswa <span class="required" style="color:red;">*</span></label>
+                                <select id="user_id" name="user_id" class="form-control" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #d1d5db;">
+                                    <option value="">-- Pilih Siswa --</option>
+                                    @foreach ($students as $student)
+                                        <option value="{{ $student->id }}">{{ $student->name }} ({{ $student->email }})</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="program_id" style="font-weight:600; font-size:13.5px; color:#4b5563;">Pilih Program <span class="required" style="color:red;">*</span></label>
+                                <select id="program_id" name="program_id" class="form-control" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #d1d5db;">
+                                    <option value="">-- Pilih Program --</option>
+                                    @foreach ($programs as $prog)
+                                        <option value="{{ $prog->id }}">{{ $prog->title }} ({{ strtoupper($prog->category) }})</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="nilai_tugas" style="font-weight:600; font-size:13.5px; color:#4b5563;">Nilai Tugas <span class="required" style="color:red;">*</span></label>
+                                <input type="number" id="nilai_tugas" name="nilai_tugas" min="0" max="100" class="form-control" placeholder="Contoh: 85" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #d1d5db;" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="nilai_kuis" style="font-weight:600; font-size:13.5px; color:#4b5563;">Nilai Kuis <span class="required" style="color:red;">*</span></label>
+                                <input type="number" id="nilai_kuis" name="nilai_kuis" min="0" max="100" class="form-control" placeholder="Contoh: 80" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #d1d5db;" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="kehadiran" style="font-weight:600; font-size:13.5px; color:#4b5563;">Kehadiran <span class="required" style="color:red;">*</span></label>
+                                <select id="kehadiran" name="kehadiran" class="form-control" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #d1d5db;">
+                                    <option value="">-- Pilih Kehadiran --</option>
+                                    <option value="Baik">Baik</option>
+                                    <option value="Cukup">Cukup</option>
+                                    <option value="Kurang">Kurang</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3" style="margin-top:20px;">
+                            <button type="submit" class="primary-btn" style="padding:10px 24px; border-radius:8px; background:#2563eb; color:#fff; border:none; font-weight:600; cursor:pointer;">Simpan Hasil Belajar</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Tabel List Hasil Belajar -->
+                <div class="table-container" style="background:#ffffff; border-radius:12px; border:1px solid #e2e8f0; padding:15px; overflow-x:auto;">
+                    <table class="table" style="width:100%; border-collapse:collapse;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid #f1f5f9; text-align: left;">
+                                <th style="padding:12px 10px; color:#64748b; font-size:0.85rem; font-weight:600;">Siswa</th>
+                                <th style="padding:12px 10px; color:#64748b; font-size:0.85rem; font-weight:600;">Program</th>
+                                <th style="padding:12px 10px; color:#64748b; font-size:0.85rem; font-weight:600; text-align:center;">Nilai Tugas</th>
+                                <th style="padding:12px 10px; color:#64748b; font-size:0.85rem; font-weight:600; text-align:center;">Nilai Kuis</th>
+                                <th style="padding:12px 10px; color:#64748b; font-size:0.85rem; font-weight:600; text-align:center;">Rata-rata</th>
+                                <th style="padding:12px 10px; color:#64748b; font-size:0.85rem; font-weight:600; text-align:center;">Kehadiran</th>
+                                <th style="padding:12px 10px; color:#64748b; font-size:0.85rem; font-weight:600; text-align:center;">Rekomendasi</th>
+                                <th style="padding:12px 10px; color:#64748b; font-size:0.85rem; font-weight:600; text-align:center;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($hasil_belajar as $record)
+                                <tr style="border-bottom: 1px solid #f1f5f9;">
+                                    <td style="padding:14px 10px; font-size:0.9rem; font-weight:600; color:#0f172a;">
+                                        {{ $record->user->name ?? 'N/A' }}<br>
+                                        <span class="text-muted" style="font-size:11px; font-weight:normal;">{{ $record->user->email ?? '' }}</span>
+                                    </td>
+                                    <td style="padding:14px 10px; font-size:0.85rem; color:#475569;">
+                                        {{ $record->program->title ?? $record->mata_pelajaran }}<br>
+                                        <span class="badge" style="font-size:10px; background:#f1f5f9; color:#64748b; padding:2px 8px; border-radius:12px;">{{ strtoupper($record->program->category ?? 'SD') }}</span>
+                                    </td>
+                                    <td style="padding:14px 10px; font-size:0.85rem; color:#475569; text-align:center; font-weight:600;">{{ $record->nilai_tugas ?? '-' }}</td>
+                                    <td style="padding:14px 10px; font-size:0.85rem; color:#475569; text-align:center; font-weight:600;">{{ $record->nilai_kuis ?? '-' }}</td>
+                                    <td style="padding:14px 10px; font-size:0.85rem; color:#475569; text-align:center; font-weight:600; color:#2563eb;">{{ number_format($record->nilai, 1) }}</td>
+                                    <td style="padding:14px 10px; font-size:0.85rem; color:#475569; text-align:center;">
+                                        <span class="badge" style="font-size:11px; padding:3px 10px; border-radius:20px; font-weight:600;
+                                            {{ $record->kehadiran === 'Baik' ? 'background:#ecfdf5; color:#059669;' : ($record->kehadiran === 'Cukup' ? 'background:#fffbeb; color:#d97706;' : 'background:#fee2e2; color:#dc2626;') }}">
+                                            {{ $record->kehadiran ?? '-' }}
+                                        </span>
+                                    </td>
+                                    <td style="padding:14px 10px; font-size:0.85rem; text-align:center;">
+                                        @if ($record->recommendation_result === 'Menunggu Input Siswa')
+                                            <span class="badge" style="background:#f1f5f9; color:#64748b; padding:4px 12px; border-radius:50px; font-size:11px; font-weight:600; border: 1px dashed #cbd5e1;">
+                                                <i class="fas fa-clock me-1"></i> Menunggu Input Siswa
+                                            </span>
+                                        @else
+                                            <span class="badge" style="padding:4px 12px; border-radius:50px; font-size:11px; font-weight:700;
+                                                {{ in_array($record->recommendation_result, ['Mahir', 'Program Pengayaan']) ? 'background:#ecfdf5; color:#059669;' : (in_array($record->recommendation_result, ['Menengah', 'Pendampingan Akademik', 'Program Reguler']) ? 'background:#eff6ff; color:#2563eb;' : 'background:#fee2e2; color:#dc2626;') }}">
+                                                {{ $record->recommendation_result }}
+                                            </span>
+                                            @if ($record->confidence)
+                                                <div style="font-size:10px; color:#94a3b8; margin-top:3px; font-weight:600;">Conf: {{ number_format($record->confidence, 2) }}%</div>
+                                            @endif
+                                        @endif
+                                    </td>
+                                    <td style="padding:14px 10px; text-align:center;">
+                                        <a href="{{ route('admin.dashboard', ['section' => 'hasil_belajar', 'action' => 'edit', 'id' => $record->id]) }}" class="action-btn edit-btn" style="text-decoration:none; display:inline-block; text-align:center; padding:5px 12px; font-size:12px; font-weight:600; border-radius:6px;">Edit</a>
+                                        
+                                        <form action="{{ route('admin.hasil_belajar.delete') }}" method="POST" style="display:inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data hasil belajar ini?')">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $record->id }}">
+                                            <button type="submit" class="action-btn delete-btn" style="padding:5px 12px; font-size:12px; font-weight:600; border-radius:6px;">Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8" style="text-align: center; padding: 25px; color: #94a3b8; font-size: 0.9rem;">Belum ada data hasil belajar diinput.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Form Edit Hasil Belajar -->
+                @if ($action == 'edit' && request()->has('id'))
+                    @php
+                        $editRecord = $hasil_belajar->firstWhere('id', request()->input('id'));
+                    @endphp
+                    @if ($editRecord)
+                        <div class="content-section" style="margin-top: 30px; border-top: 2px solid #edf2f7; padding-top: 30px;">
+                            <div class="section-header">
+                                <h3>Edit Hasil Belajar: {{ $editRecord->user->name ?? 'N/A' }}</h3>
+                            </div>
+                            <div class="section-body">
+                                <form action="{{ route('admin.hasil_belajar.update') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $editRecord->id }}">
+                                    <div class="form-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+                                        <div class="form-group">
+                                            <label for="edit_user_id" style="font-weight:600; font-size:13.5px; color:#4b5563;">Pilih Siswa <span class="required" style="color:red;">*</span></label>
+                                            <select id="edit_user_id" name="user_id" class="form-control" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #d1d5db;">
+                                                @foreach ($students as $student)
+                                                    <option value="{{ $student->id }}" {{ $editRecord->user_id == $student->id ? 'selected' : '' }}>{{ $student->name }} ({{ $student->email }})</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="edit_program_id" style="font-weight:600; font-size:13.5px; color:#4b5563;">Pilih Program <span class="required" style="color:red;">*</span></label>
+                                            <select id="edit_program_id" name="program_id" class="form-control" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #d1d5db;">
+                                                @foreach ($programs as $prog)
+                                                    <option value="{{ $prog->id }}" {{ $editRecord->program_id == $prog->id ? 'selected' : '' }}>{{ $prog->title }} ({{ strtoupper($prog->category) }})</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="edit_nilai_tugas" style="font-weight:600; font-size:13.5px; color:#4b5563;">Nilai Tugas <span class="required" style="color:red;">*</span></label>
+                                            <input type="number" id="edit_nilai_tugas" name="nilai_tugas" min="0" max="100" class="form-control" value="{{ $editRecord->nilai_tugas }}" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #d1d5db;" />
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="edit_nilai_kuis" style="font-weight:600; font-size:13.5px; color:#4b5563;">Nilai Kuis <span class="required" style="color:red;">*</span></label>
+                                            <input type="number" id="edit_nilai_kuis" name="nilai_kuis" min="0" max="100" class="form-control" value="{{ $editRecord->nilai_kuis }}" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #d1d5db;" />
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="edit_kehadiran" style="font-weight:600; font-size:13.5px; color:#4b5563;">Kehadiran <span class="required" style="color:red;">*</span></label>
+                                            <select id="edit_kehadiran" name="kehadiran" class="form-control" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #d1d5db;">
+                                                <option value="Baik" {{ $editRecord->kehadiran == 'Baik' ? 'selected' : '' }}>Baik</option>
+                                                <option value="Cukup" {{ $editRecord->kehadiran == 'Cukup' ? 'selected' : '' }}>Cukup</option>
+                                                <option value="Kurang" {{ $editRecord->kehadiran == 'Kurang' ? 'selected' : '' }}>Kurang</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-3" style="margin-top:20px; display:flex; gap:10px;">
+                                        <button type="submit" class="primary-btn" style="padding:10px 24px; border-radius:8px; background:#2563eb; color:#fff; border:none; font-weight:600; cursor:pointer;">Simpan Perubahan</button>
+                                        <a href="{{ route('admin.dashboard', ['section' => 'hasil_belajar']) }}" class="action-btn" style="padding:9px 20px; border-radius:8px; background:#cbd5e1; color:#0f172a; text-decoration:none; display:inline-block; font-weight:600; text-align:center;">Batal</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    @endif
+                @endif
             </div>
         </div>
 
@@ -842,13 +1035,14 @@
                                     <span class="badge-status badge-{{ $registration->status }}">{{ $registration->status }}</span>
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5" style="text-align: center; padding: 25px; color: #94a3b8; font-size: 0.9rem;">Belum ada pendaftaran masuk.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                            @empty
+                                <tr>
+                                    <td colspan="5" style="text-align: center; padding: 25px; color: #94a3b8; font-size: 0.9rem;">Belum ada pendaftaran masuk.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     @endif
@@ -863,22 +1057,22 @@
         new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: ['Program Reguler', 'Program Intensif', 'Pendampingan Intensif'],
-                datasets: [{
-                    label: 'Jumlah Prediksi',
-                    data: [
-                        {{ $mlStats['program_reguler'] }},
-                        {{ $mlStats['program_intensif'] }},
-                        {{ $mlStats['pendampingan_intensif'] }}
-                    ],
-                    backgroundColor: [
-                        '#10b981', // Hijau - Reguler
-                        '#f59e0b', // Kuning - Intensif
-                        '#ef4444'  // Merah - Pendampingan
-                    ],
-                    borderWidth: 1,
-                    borderColor: '#ffffff'
-                }]
+            labels: ['Mahir', 'Menengah', 'Dasar'],
+            datasets: [{
+                label: 'Jumlah Prediksi',
+                data: [
+                    {{ $mlStats['mahir'] }},
+                    {{ $mlStats['menengah'] }},
+                    {{ $mlStats['dasar'] }}
+                ],
+                backgroundColor: [
+                    '#10b981', // Green - Mahir
+                    '#f59e0b', // Orange - Menengah
+                    '#ef4444'  // Red - Dasar
+                ],
+                borderWidth: 1,
+                borderColor: '#ffffff'
+            }]
             },
             options: {
                 responsive: true,
@@ -928,11 +1122,11 @@
             form.querySelector('button[type="submit"]').disabled = true;
             
             const formData = {
-                nilai: form.nilai.value,
-                jam_belajar: form.jam_belajar.value,
+                nilai_tugas: form.nilai_tugas.value,
+                nilai_kuis: form.nilai_kuis.value,
+                study_duration: form.study_duration.value,
                 tingkat_kesulitan: form.tingkat_kesulitan.value,
                 kehadiran: form.kehadiran.value,
-                gaya_belajar: form.gaya_belajar.value,
                 _token: form._token.value
             };
             

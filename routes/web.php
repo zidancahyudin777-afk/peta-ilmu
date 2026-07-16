@@ -238,6 +238,9 @@ Route::middleware(['admin.auth'])->group(function () {
     Route::post('/admin/pendaftaran/delete', [AdminDashboardController::class, 'deleteRegistration'])->name('admin.registration.delete');
     Route::post('/admin/profil/update', [AdminDashboardController::class, 'updateProfile'])->name('admin.profil.update');
     Route::post('/admin/api-testing/predict', [AdminDashboardController::class, 'testPredict'])->name('admin.api_testing.predict');
+    Route::post('/admin/hasil-belajar/add', [AdminDashboardController::class, 'addHasilBelajar'])->name('admin.hasil_belajar.add');
+    Route::post('/admin/hasil-belajar/update', [AdminDashboardController::class, 'updateHasilBelajar'])->name('admin.hasil_belajar.update');
+    Route::post('/admin/hasil-belajar/delete', [AdminDashboardController::class, 'deleteHasilBelajar'])->name('admin.hasil_belajar.delete');
 });
 
 require __DIR__.'/auth.php';

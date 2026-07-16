@@ -15,9 +15,9 @@ return new class extends Migration
         Schema::create('learning_data', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('mata_pelajaran');
-            $table->integer('nilai');
-            $table->string('tingkat_kesulitan');
+            $table->string('mata_pelajaran', 50);
+            $table->decimal('nilai', 5, 2)->nullable();
+            $table->enum('tingkat_kesulitan', ['Mudah', 'Sedang', 'Sulit'])->default('Sedang');
             $table->string('gaya_belajar')->nullable();
             $table->text('catatan')->nullable();
             $table->timestamps();
