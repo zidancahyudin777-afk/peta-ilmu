@@ -11,11 +11,11 @@ class StudentDashboardController extends Controller
     {
         $user = auth()->user() ?? $request->user();
         if ($user) {
-            // Alias: nama → name (for Blade compatibility)
+            
             if (!isset($user->nama)) {
                 $user->nama = $user->name;
             }
-            // Derive username from email prefix if not stored
+            
             if (!isset($user->username)) {
                 $user->username = explode('@', $user->email ?? 'siswa@-')[0];
             }
@@ -27,7 +27,7 @@ class StudentDashboardController extends Controller
     {
         $student = $this->getStudent($request);
 
-        // Fetch real learning data for this user
+        
         $learningCount  = LearningData::where('user_id', $student->id)->count();
         $latestLearning = LearningData::where('user_id', $student->id)
             ->orderBy('created_at', 'desc')

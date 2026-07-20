@@ -346,6 +346,63 @@
             opacity: 0;
             transform: translateY(12px);
         }
+
+        /* Responsive Hero & Typography Overrides */
+        @media (max-width: 991px) {
+            .hero-section-custom {
+                padding: 60px 0 80px 0 !important;
+                min-height: auto !important;
+                background: linear-gradient(180deg, rgba(15, 32, 67, 0.96) 0%, rgba(30, 60, 114, 0.9) 100%), 
+                            url('/petailmu/images/indonesian_students_learning.png') !important;
+                background-size: cover !important;
+                background-position: center center !important;
+                text-align: center !important;
+            }
+            .hero-section-custom .pe-lg-4 {
+                padding-right: 0 !important;
+            }
+            .hero-section-custom .d-inline-flex {
+                justify-content: center !important;
+            }
+            .hero-title {
+                font-size: 2.2rem !important;
+                text-align: center !important;
+            }
+            .hero-subtitle {
+                font-size: 1rem !important;
+                text-align: center !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+            .hero-btn-group {
+                justify-content: center !important;
+            }
+            .word-rotate-wrap {
+                text-align: center !important;
+                min-width: auto !important;
+                display: inline !important;
+            }
+            .word-rotate {
+                display: inline !important;
+            }
+        }
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem !important;
+            }
+            .hero-subtitle {
+                font-size: 0.9rem !important;
+            }
+            .section-header-custom h2 {
+                font-size: 1.8rem !important;
+            }
+            .about-content h3 {
+                font-size: 1.6rem !important;
+            }
+            .cta-section-custom h2 {
+                font-size: 1.6rem !important;
+            }
+        }
     </style>
 @endsection
 

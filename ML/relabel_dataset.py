@@ -29,7 +29,7 @@ def remap_label(row):
             return 'Program Pengayaan'
         else:
             return 'Program Reguler'
-    return old  # fallback, tidak diharapkan terjadi
+    return old  
 
 df['rekomendasi'] = df.apply(remap_label, axis=1)
 

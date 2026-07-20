@@ -79,7 +79,7 @@ Route::post('/pendaftaran', function (\Illuminate\Http\Request $request) {
     $subjects = explode(',', $request->input('mata_pelajaran'));
     $subjects = array_filter(array_map('trim', $subjects));
 
-    // Build packageMap dynamically from DB to ensure form keys always match
+    
     $allPackages = DB::table('program_packages')->distinct()->get(['id', 'program_id', 'package_type']);
     $packageMap = [];
     foreach ($allPackages as $pkg) {
@@ -183,7 +183,7 @@ Route::post('/pendaftaran', function (\Illuminate\Http\Request $request) {
             ]);
         }
 
-        // Create student User account with their chosen password
+        
         $user = \App\Models\User::create([
             'name' => $formData['nama_lengkap'],
             'email' => $formData['email'],
@@ -201,7 +201,7 @@ Route::post('/pendaftaran', function (\Illuminate\Http\Request $request) {
     }
 })->name('pendaftaran.store');
 
-// Student Routes
+
 use App\Http\Controllers\StudentDashboardController;
 use App\Http\Controllers\LearningDataController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -216,12 +216,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/siswa/logout', [AuthenticatedSessionController::class, 'destroy'])->name('siswa.logout');
 });
 
-// Fallback /dashboard route for Breeze redirection
+
 Route::get('/dashboard', function () {
     return redirect()->route('siswa.dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-// Admin Routes
+
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminDashboardController;
 
@@ -237,6 +237,7 @@ Route::middleware(['admin.auth'])->group(function () {
     Route::post('/admin/pendaftaran/status', [AdminDashboardController::class, 'updateRegistrationStatus'])->name('admin.registration.update_status');
     Route::post('/admin/pendaftaran/delete', [AdminDashboardController::class, 'deleteRegistration'])->name('admin.registration.delete');
     Route::post('/admin/profil/update', [AdminDashboardController::class, 'updateProfile'])->name('admin.profil.update');
+    Route::post('/admin/profil/upload-foto', [AdminDashboardController::class, 'uploadFotoGuru'])->name('admin.foto_guru.upload');
     Route::post('/admin/api-testing/predict', [AdminDashboardController::class, 'testPredict'])->name('admin.api_testing.predict');
     Route::post('/admin/hasil-belajar/add', [AdminDashboardController::class, 'addHasilBelajar'])->name('admin.hasil_belajar.add');
     Route::post('/admin/hasil-belajar/update', [AdminDashboardController::class, 'updateHasilBelajar'])->name('admin.hasil_belajar.update');

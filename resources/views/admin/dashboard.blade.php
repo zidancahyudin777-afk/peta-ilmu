@@ -209,6 +209,35 @@
                     echo rtrim($pengajar_str, ',');
                 @endphp</textarea>
             </div>
+            <div class="form-group" style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px dashed #cbd5e1; margin-top: 15px; margin-bottom: 20px;">
+                <label style="font-weight: 600; color: #1e293b; margin-bottom: 8px; display: block;">
+                    <i class="fas fa-upload" style="color: #6366f1; margin-right: 6px;"></i> Upload Foto Guru Baru
+                </label>
+                <p style="font-size: 0.8rem; color: #64748b; margin-top: 0; margin-bottom: 12px;">
+                    Unggah foto guru di sini. Setelah berhasil diunggah, salin path-nya (misal: <code>images/nama_file.png</code>) dan masukkan ke format Tim Pengajar di atas.
+                </p>
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <input type="file" id="upload_foto_guru_input" accept="image/*" style="display: none;" />
+                    <button type="button" class="action-btn" id="btn_pilih_foto" style="padding: 8px 16px; background: #6366f1; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 6px; transition: background-color 0.2s;">
+                        <i class="fas fa-image"></i> Pilih & Upload Foto
+                    </button>
+                    <span id="upload_status" style="font-size: 0.85rem; color: #64748b;"></span>
+                </div>
+                
+                <!-- Upload Result / Preview -->
+                <div id="upload_result_container" style="display: none; margin-top: 15px; align-items: center; gap: 15px; padding: 10px; background: white; border-radius: 6px; border: 1px solid #e2e8f0;">
+                    <img id="upload_preview" src="" alt="Preview" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1;" />
+                    <div style="flex: 1;">
+                        <div style="font-size: 0.8rem; color: #475569; font-weight: 500;">Berhasil diunggah! Gunakan path ini:</div>
+                        <div style="display: flex; gap: 8px; margin-top: 4px; align-items: center; flex-wrap: wrap;">
+                            <code id="uploaded_path_code" style="background: #f1f5f9; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: 600; color: #0f172a;">images/filename.jpg</code>
+                            <button type="button" id="btn_copy_path" style="padding: 4px 10px; background: #e2e8f0; border: none; border-radius: 4px; cursor: pointer; font-size: 0.75rem; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
+                                <i class="fas fa-copy"></i> Salin Path
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <label for="mata_pelajaran_filter">Filter Mata Pelajaran (format: kode|nama, pisahkan item dengan koma)</label>
                 <textarea id="mata_pelajaran_filter" name="mata_pelajaran_filter" class="form-control" style="width: 100%; min-height: 80px; padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-family: inherit;">@php
@@ -1182,6 +1211,72 @@
                     }, 2000);
                 });
         });
+        @endif
+
+        @if ($section == 'profil')
+        const fileInput = document.getElementById('upload_foto_guru_input');
+        const btnPilihFoto = document.getElementById('btn_pilih_foto');
+        const uploadStatus = document.getElementById('upload_status');
+        const uploadResultContainer = document.getElementById('upload_result_container');
+        const uploadPreview = document.getElementById('upload_preview');
+        const uploadedPathCode = document.getElementById('uploaded_path_code');
+        const btnCopyPath = document.getElementById('btn_copy_path');
+
+        if (btnPilihFoto) {
+            btnPilihFoto.addEventListener('click', function() {
+                fileInput.click();
+            });
+        }
+
+        if (fileInput) {
+            fileInput.addEventListener('change', function() {
+                if (fileInput.files.length === 0) return;
+                
+                const file = fileInput.files[0];
+                const formData = new FormData();
+                formData.append('foto', file);
+                formData.append('_token', '{{ csrf_token() }}');
+
+                uploadStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengunggah...';
+                btnPilihFoto.disabled = true;
+
+                fetch("{{ route('admin.foto_guru.upload') }}", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        uploadStatus.innerHTML = '<span style="color: #10b981;"><i class="fas fa-check-circle"></i> Selesai!</span>';
+                        uploadPreview.src = data.url;
+                        uploadedPathCode.textContent = data.path;
+                        uploadResultContainer.style.display = 'flex';
+                    } else {
+                        uploadStatus.innerHTML = '<span style="color: #ef4444;"><i class="fas fa-times-circle"></i> Gagal: ' + data.message + '</span>';
+                    }
+                })
+                .catch(error => {
+                    uploadStatus.innerHTML = '<span style="color: #ef4444;"><i class="fas fa-times-circle"></i> Error: ' + error.message + '</span>';
+                })
+                .finally(() => {
+                    btnPilihFoto.disabled = false;
+                    fileInput.value = ''; // Reset file input
+                });
+            });
+        }
+
+        if (btnCopyPath) {
+            btnCopyPath.addEventListener('click', function() {
+                navigator.clipboard.writeText(uploadedPathCode.textContent)
+                    .then(() => {
+                        const originalText = btnCopyPath.innerHTML;
+                        btnCopyPath.innerHTML = '<i class="fas fa-check"></i> Disalin!';
+                        setTimeout(() => {
+                            btnCopyPath.innerHTML = originalText;
+                        }, 2000);
+                    });
+            });
+        }
         @endif
     });
 </script>

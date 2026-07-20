@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 class LearningDataController extends Controller
 {
-    // ─── Materi per Mata Pelajaran (ditentukan Laravel, bukan ML) ─────────────
+    
     private const MATERI_PER_MAPEL = [
         'Matematika'       => ['Aljabar', 'Fungsi', 'Persamaan Linear'],
         'Bahasa Indonesia' => ['Teks Eksposisi', 'EYD', 'Paragraf'],
@@ -21,7 +21,7 @@ class LearningDataController extends Controller
         'Komputer'         => ['Algoritma', 'Flowchart', 'Pemrograman Dasar'],
     ];
 
-    // ─── Detail Rekomendasi per Kategori (ditentukan Laravel, bukan ML) ───────
+    
     private const REKOMENDASI_DETAIL = [
         'Program Remedial Intensif' => [
             'study_frequency' => '2–3 sesi per hari',
@@ -61,7 +61,7 @@ class LearningDataController extends Controller
                 'Kerjakan soal tingkat tinggi',
             ],
         ],
-        // Dukungan untuk Kategori Target Baru
+        
         'Dasar' => [
             'study_frequency' => '2–3 sesi per hari',
             'study_duration'  => '90–120 menit',
@@ -119,7 +119,7 @@ class LearningDataController extends Controller
             'catatan'          => 'nullable|string|max:1000',
         ]);
 
-        // Ambil record hasil belajar yang diinput oleh Admin
+        
         $record = LearningData::where('id', $validated['learning_data_id'])
             ->where('user_id', auth()->id())
             ->where('recommendation_result', 'Menunggu Input Siswa')
@@ -128,7 +128,7 @@ class LearningDataController extends Controller
         $program = Program::find($record->program_id);
         $mataPelajaran = $record->mata_pelajaran;
 
-        // Gunakan data akademik dari Admin untuk payload Flask API
+        
         $nilaiRerata = $record->nilai;
         $nilaiTugas = $record->nilai_tugas;
         $nilaiKuis = $record->nilai_kuis;
@@ -138,7 +138,7 @@ class LearningDataController extends Controller
         $confidence       = null;
         $flaskOffline     = false;
 
-        // ─── Bangun Payload Flask API ─────────────────────────────────────────
+        
         $flaskPayload = [
             'nilai_tugas'       => (float) $nilaiTugas,
             'nilai_kuis'        => (float) $nilaiKuis,
@@ -149,7 +149,7 @@ class LearningDataController extends Controller
 
         $startTime = microtime(true);
         try {
-            // timeout pendek agar jika Flask offline, aplikasi Laravel tidak hang lama
+            
             $response = Http::timeout(3)->post('http://127.0.0.1:5000/predict', $flaskPayload);
             $responseTimeMs = round((microtime(true) - $startTime) * 1000, 2);
 
@@ -187,7 +187,7 @@ class LearningDataController extends Controller
             ]);
         }
 
-        // ─── Klasifikasi Fallback jika API Flask Offline ───────────────────────
+        
         $finalClass = $predictionResult;
         if (!$predictionResult) {
             if ($nilaiRerata >= 80 && $kehadiran !== 'Kurang') {
@@ -199,7 +199,7 @@ class LearningDataController extends Controller
             }
         }
 
-        // ─── Bangun Rekomendasi Personal ──────────────────────────────────────
+        
         $detail     = self::REKOMENDASI_DETAIL[$finalClass] ?? null;
         $materiList = $program && is_array($program->subjects) ? $program->subjects : [];
 
@@ -208,13 +208,13 @@ class LearningDataController extends Controller
                 'tingkat_kesulitan'     => $validated['tingkat_kesulitan'],
                 'study_duration'        => $validated['study_duration'],
                 'catatan'               => $validated['catatan'] ?? null,
-                // Hasil prediksi (Flask atau Fallback)
+                
                 'recommendation_result' => $finalClass,
                 'confidence'            => $confidence,
                 'prediction_time'       => now(),
-                // Parameter rekomendasi terstruktur
+                
                 'study_frequency'       => $detail['study_frequency'] ?? null,
-                'study_duration_rec'    => $detail['study_duration'] ?? null, // Kolom rekomendasi durasi
+                'study_duration_rec'    => $detail['study_duration'] ?? null, 
                 'priority'              => $detail['priority'] ?? null,
                 'recommended_material'  => $materiList ? json_encode($materiList) : null,
                 'study_suggestion'      => $detail ? json_encode($detail['study_suggestion']) : null,

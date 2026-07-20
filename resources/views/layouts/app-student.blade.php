@@ -236,7 +236,10 @@
 
     <!-- Mobile topbar -->
     <div class="topbar">
-        <span class="brand-name"><i class="fas fa-graduation-cap me-2"></i>Peta Ilmu</span>
+        <span class="brand-name">
+            <img src="{{ asset('petailmu/images/IMG_3898.PNG') }}" alt="Logo Peta Ilmu" style="height: 24px; width: auto; margin-right: 8px; vertical-align: middle; display: inline-block;" />
+            Peta Ilmu
+        </span>
         <button class="topbar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
             <i class="fas fa-bars"></i>
         </button>
@@ -248,7 +251,9 @@
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-brand">
-            <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div style="background: #ffffff; width: 60px; height: 60px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin: 0 auto 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                <img src="{{ asset('petailmu/images/IMG_3898.PNG') }}" alt="Logo Peta Ilmu" style="height: 42px; width: auto;" />
+            </div>
             <h5>Dashboard Siswa</h5>
             <p>Bimbingan Belajar Peta Ilmu</p>
         </div>

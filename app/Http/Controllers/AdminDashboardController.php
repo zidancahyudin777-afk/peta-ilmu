@@ -31,7 +31,7 @@ class AdminDashboardController extends Controller
         $pendaftaran = Registration::with('subjects')->orderBy('created_at', 'desc')->get();
         $programs = Program::with(['features', 'packages.prices'])->orderBy('id')->get();
 
-        // Retrieve dynamic data structure for pricing calculation
+        
         $programData = [];
         foreach ($programs as $prog) {
             $jenjang = strtolower($prog->category);
@@ -62,7 +62,7 @@ class AdminDashboardController extends Controller
             }
         }
 
-        // Profile data
+        
         $organisasi_info = OrganisasiInfo::first();
         $misi_list = MisiOrganisasi::orderBy('urutan')->pluck('misi_text')->toArray();
         $sejarah_paragraf = SejarahOrganisasi::orderBy('urutan')->pluck('paragraf')->toArray();
@@ -86,7 +86,7 @@ class AdminDashboardController extends Controller
             $reg->price_info = $this->calculateRegistrationPrice($reg, $programData);
         }
 
-        // Machine Learning Stats
+        
         $mlStats = [
             'total_predictions' => 0,
             'dasar'             => 0,
@@ -108,7 +108,7 @@ class AdminDashboardController extends Controller
             }
         }
 
-        // Flask API Status Stats
+        
         $flaskStatus = [
             'status' => 'Offline',
             'version' => '1.0',
@@ -116,7 +116,7 @@ class AdminDashboardController extends Controller
             'total_requests' => 0
         ];
 
-        // Fetch fallback values from DB in case API is offline or has reset
+        
         $lastPred = LearningData::whereNotNull('prediction_time')->orderBy('prediction_time', 'desc')->first();
         $flaskStatus['last_prediction_time'] = $lastPred ? \Carbon\Carbon::parse($lastPred->prediction_time)->translatedFormat('d M Y, H:i:s') : '-';
         $flaskStatus['total_requests'] = LearningData::whereNotNull('recommendation_result')->count();
@@ -134,7 +134,7 @@ class AdminDashboardController extends Controller
                 }
             }
         } catch (\Exception $e) {
-            // Flask is offline
+            
         }
 
         $students = [];
@@ -372,7 +372,7 @@ class AdminDashboardController extends Controller
                 'subjects' => $subjects
             ]);
 
-            // Clear features and packages
+            
             ProgramFeature::where('program_id', $program->id)->delete();
             $packageIds = ProgramPackage::where('program_id', $program->id)->pluck('id');
             PackagePrice::whereIn('package_id', $packageIds)->delete();
@@ -458,7 +458,7 @@ class AdminDashboardController extends Controller
             DB::beginTransaction();
             DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-            // 1. Organisasi Info
+            
             $org = OrganisasiInfo::first();
             if (!$org) {
                 $org = new OrganisasiInfo();
@@ -468,7 +468,7 @@ class AdminDashboardController extends Controller
             $org->jumlah_siswa_awal = (int)$request->input('jumlah_siswa_awal');
             $org->save();
 
-            // 2. Sejarah
+            
             SejarahOrganisasi::truncate();
             $sejarah = explode(',', $request->input('sejarah'));
             foreach ($sejarah as $index => $paragraf) {
@@ -480,7 +480,7 @@ class AdminDashboardController extends Controller
                 }
             }
 
-            // 3. Misi
+            
             MisiOrganisasi::truncate();
             $misi = explode(',', $request->input('misi'));
             foreach ($misi as $index => $misi_text) {
@@ -492,7 +492,7 @@ class AdminDashboardController extends Controller
                 }
             }
 
-            // 4. Nilai-Nilai
+            
             NilaiOrganisasi::truncate();
             $nilai_nilai = explode(',', $request->input('nilai_nilai'));
             foreach ($nilai_nilai as $nilai) {
@@ -506,7 +506,7 @@ class AdminDashboardController extends Controller
                 }
             }
 
-            // 5. Struktur
+            
             StrukturOrganisasi::truncate();
             $struktur = explode(',', $request->input('struktur_organisasi'));
             foreach ($struktur as $staff) {
@@ -522,7 +522,7 @@ class AdminDashboardController extends Controller
                 }
             }
 
-            // 6. Mata Pelajaran Filter
+            
             MataPelajaran::truncate();
             $filter = explode(',', $request->input('mata_pelajaran_filter'));
             foreach ($filter as $item) {
@@ -535,7 +535,7 @@ class AdminDashboardController extends Controller
                 }
             }
 
-            // 7. Tim Pengajar
+            
             TimPengajar::truncate();
             $pengajar = explode(',', $request->input('tim_pengajar'));
             foreach ($pengajar as $teacher) {
@@ -544,7 +544,7 @@ class AdminDashboardController extends Controller
                     $mp = MataPelajaran::where('kode', $mata_pelajaran_kode)->first();
                     TimPengajar::create([
                         'nama' => $nama,
-                        'mata_pelajaran_id' => $mp ? $mp->id : 1, // fallback mapping
+                        'mata_pelajaran_id' => $mp ? $mp->id : 1, 
                         'deskripsi' => $deskripsi,
                         'foto' => $foto,
                         'status' => 'aktif'
@@ -552,7 +552,7 @@ class AdminDashboardController extends Controller
                 }
             }
 
-            // 8. Kontak Info
+            
             KontakInfo::truncate();
             $alamat = explode(',', $request->input('alamat'));
             foreach ($alamat as $index => $val) {
@@ -589,6 +589,35 @@ class AdminDashboardController extends Controller
             DB::rollBack();
             return redirect()->route('admin.dashboard', ['section' => 'profil'])
                 ->with('error', 'Gagal memperbarui profil: ' . $e->getMessage());
+        }
+    }
+
+    public function uploadFotoGuru(Request $request)
+    {
+        $request->validate([
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10240',
+        ]);
+
+        try {
+            if ($request->hasFile('foto')) {
+                $file = $request->file('foto');
+                $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $cleanName = preg_replace('/[^a-zA-Z0-9_-]/', '_', $originalName);
+                $filename = 'guru-' . time() . '-' . $cleanName . '.' . $file->getClientOriginalExtension();
+                
+                $file->move(public_path('petailmu/images'), $filename);
+                
+                $path = 'images/' . $filename;
+                
+                return response()->json([
+                    'success' => true,
+                    'path' => $path,
+                    'url' => asset('petailmu/' . $path)
+                ]);
+            }
+            return response()->json(['success' => false, 'message' => 'File tidak ditemukan.']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 
@@ -685,7 +714,7 @@ class AdminDashboardController extends Controller
             'nilai_kuis' => $request->input('nilai_kuis'),
             'nilai' => $nilai,
             'kehadiran' => $request->input('kehadiran'),
-            'tingkat_kesulitan' => 'Sedang', // default placeholder before student completes it
+            'tingkat_kesulitan' => 'Sedang', 
             'recommendation_result' => 'Menunggu Input Siswa',
         ]);
 

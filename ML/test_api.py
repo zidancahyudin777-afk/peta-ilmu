@@ -3,7 +3,7 @@ import json
 
 url = 'http://127.0.0.1:5000/predict'
 
-# Test payloads: list of different student scenarios matching the new blueprint
+
 test_cases = [
     {
         "description": "Kasus 1: Nilai tinggi, kehadiran baik (Harapan: Mahir)",

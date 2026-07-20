@@ -15,12 +15,12 @@ class ProgramSeeder extends Seeder
      */
     public function run(): void
     {
-        // Avoid duplicate seeding
+        
         if (Program::count() > 0) {
             return;
         }
 
-        // 1. Program SD
+        
         $sd = Program::create([
             'program_code' => 'PROG_SD',
             'category' => 'sd',
@@ -73,7 +73,7 @@ class ProgramSeeder extends Seeder
         PackagePrice::create(['package_id' => $pkgSdPrivOut->id, 'price_label' => 'Harian', 'price' => 40000]);
 
 
-        // 2. Program SMP
+        
         $smp = Program::create([
             'program_code' => 'PROG_SMP',
             'category' => 'smp',
@@ -125,7 +125,7 @@ class ProgramSeeder extends Seeder
         PackagePrice::create(['package_id' => $pkgSmpPrivOut->id, 'price_label' => 'Harian', 'price' => 45000]);
 
 
-        // 3. Program SMA
+        
         $sma = Program::create([
             'program_code' => 'PROG_SMA',
             'category' => 'sma',

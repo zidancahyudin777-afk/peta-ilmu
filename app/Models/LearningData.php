@@ -19,16 +19,16 @@ class LearningData extends Model
         'kehadiran',
         'gaya_belajar',
         'catatan',
-        // Hasil prediksi Random Forest (dari Flask)
+        
         'recommendation_result',
         'confidence',
         'prediction_time',
-        // Rekomendasi personal yang dibangun oleh Laravel
+        
         'study_frequency',
         'study_duration',
         'priority',
-        'recommended_material',  // JSON string
-        'study_suggestion',      // JSON string
+        'recommended_material',  
+        'study_suggestion',      
         'prediction_date',
     ];
 

@@ -251,6 +251,84 @@
           color: #fff !important;
           text-decoration: none;
       }
+
+      /* ── Responsive Header Layouts ──────────────────────── */
+      @media (max-width: 768px) {
+          .hero-section-custom,
+          .page-header,
+          .program-hero,
+          .registration-hero {
+              padding: 60px 0 !important;
+              min-height: 280px !important;
+              background-position: center center !important;
+              text-align: center !important;
+          }
+          
+          .hero-section-custom {
+              background: linear-gradient(180deg, rgba(15, 32, 67, 0.96) 0%, rgba(30, 60, 114, 0.9) 100%), 
+                          url('/petailmu/images/indonesian_students_learning.png') !important;
+              background-size: cover !important;
+          }
+
+          .page-header-profil {
+              background: linear-gradient(180deg, rgba(15, 32, 67, 0.96) 0%, rgba(30, 60, 114, 0.9) 100%), 
+                          url('/petailmu/images/indonesian_teacher_teaching.png') !important;
+              background-size: cover !important;
+          }
+
+          .program-hero {
+              background: linear-gradient(180deg, rgba(15, 32, 67, 0.96) 0%, rgba(30, 60, 114, 0.9) 100%), 
+                          url('/petailmu/images/indonesian_program_header.png') !important;
+              background-size: cover !important;
+          }
+
+          .registration-hero {
+              background: linear-gradient(180deg, rgba(15, 32, 67, 0.96) 0%, rgba(30, 60, 114, 0.9) 100%), 
+                          url('/petailmu/images/indonesian_registration_header.png') !important;
+              background-size: cover !important;
+          }
+
+          .page-header-kontak {
+              background: linear-gradient(180deg, rgba(15, 32, 67, 0.96) 0%, rgba(30, 60, 114, 0.9) 100%), 
+                          url('/petailmu/images/indonesian_contact_header.png') !important;
+              background-size: cover !important;
+          }
+
+          .page-header-content,
+          .program-hero .container,
+          .registration-hero .container {
+              text-align: center !important;
+              display: flex !important;
+              flex-direction: column !important;
+              align-items: center !important;
+              justify-content: center !important;
+          }
+
+          .hero-section-custom h1,
+          .page-header h1,
+          .program-hero h1,
+          .registration-hero h1 {
+              font-size: 2rem !important;
+              text-align: center !important;
+          }
+
+          .hero-section-custom p,
+          .page-header p,
+          .program-hero p,
+          .registration-hero p,
+          .page-header-content p {
+              font-size: 1rem !important;
+              text-align: center !important;
+              margin-bottom: 20px !important;
+          }
+
+          .breadcrumb,
+          .page-header .breadcrumb,
+          .program-hero .breadcrumb,
+          .registration-hero .breadcrumb {
+              justify-content: center !important;
+          }
+      }
     </style>
   </head>
   <body>

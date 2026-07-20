@@ -206,6 +206,47 @@
             transition: all .2s;
         }
         .btn-new:hover { background: #1d4ed8; color: #fff; border-color: #1d4ed8; }
+        @media (max-width: 576px) {
+            .rek-container {
+                padding: 15px;
+            }
+            .rek-header h2 {
+                font-size: 18px;
+            }
+            .rek-header p {
+                font-size: 12px;
+            }
+            .hero-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 20px 15px;
+                gap: 12px;
+            }
+            .hero-icon {
+                font-size: 2rem;
+            }
+            .hero-body h3 {
+                font-size: 1.2rem;
+            }
+            .hero-body p {
+                font-size: 13px;
+            }
+            .stat-card {
+                padding: 12px 10px;
+                min-width: 120px;
+            }
+            .stat-card .stat-value {
+                font-size: 15px;
+            }
+            .section-block {
+                padding: 15px;
+            }
+            .btn-back, .btn-new {
+                width: 100%;
+                text-align: center;
+            }
+        }
     </style>
 @endsection
 

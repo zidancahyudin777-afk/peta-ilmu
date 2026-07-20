@@ -130,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mobileMenu && navMenu) {
             mobileMenu.addEventListener('click', () => {
                 navMenu.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
             });
         }
 

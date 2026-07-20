@@ -96,6 +96,21 @@
             font-size: 13.5px;
             outline: none;
         }
+        @media (max-width: 576px) {
+            .riwayat-container {
+                padding: 15px;
+            }
+            .riwayat-header h2 {
+                font-size: 18px;
+            }
+            .riwayat-header p {
+                font-size: 12px;
+            }
+            .btn-primary-custom {
+                width: 100%;
+                text-align: center;
+            }
+        }
     </style>
 @endsection
 

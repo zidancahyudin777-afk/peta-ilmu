@@ -207,6 +207,17 @@
             margin-right: 5px;
             font-size: 12px;
         }
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            .login-card {
+                padding: 30px 15px;
+            }
+            body::before {
+                height: 250px;
+            }
+        }
     </style>
 </head>
 <body>

@@ -279,6 +279,13 @@
         .bimbingan-panel { flex-direction: column; gap: 14px; }
         .bimbingan-icon-wrap { width: 40px; height: 40px; font-size: 1rem; }
     }
+    @media (max-width: 480px) {
+        .info-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+        }
+    }
 </style>
 @endsection
 

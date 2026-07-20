@@ -102,10 +102,7 @@ try {
                     </div>
                 </div>
                 <div class="sejarah-image">
-                    <img src="{{ asset('petailmu/images/sejarah-building.jpg') }}" alt="Peta Ilmu" />
-                    <div class="image-caption">
-                        <p>Peta Ilmu yang telah menjadi rumah belajar ribuan siswa</p>
-                    </div>
+                    <img src="{{ asset('petailmu/images/IMG_3898.PNG') }}" alt="Peta Ilmu" />
                 </div>
             </div>
         </div>

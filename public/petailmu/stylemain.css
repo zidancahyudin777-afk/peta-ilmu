@@ -235,67 +235,91 @@ a {
     font-size: 1.3rem;
   }
 
-  /* Menggabungkan styling logo img untuk mobile */
   .logo img {
     width: 40px;
     height: 40px;
   }
 
   .nav-menu {
-  display: none; /* Hidden by default on mobile */
-}
-
-.nav-menu.active {
-  display: block; /* Show when active */
-  position: fixed;
-  top: 70px;
-  left: 0;
-  width: 100%;
-  height: calc(100vh - 70px);
-  background-color: #fff;
-  padding: 40px 0;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
-  z-index: 1000;
-}
-
-.nav-menu ul {
-  flex-direction: column;
-  align-items: center;
-}
-
-.nav-menu li {
-  margin: 15px 0;
-}
-
-.nav-menu a {
-  display: block;
-  padding: 10px 0;
-  font-size: 1.1rem;
-}
-
-.mobile-menu {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .nav-menu {
     display: none;
   }
 
   .nav-menu.active {
     display: block;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background-color: #fff;
+    padding: 40px 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    z-index: 1000;
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-menu li {
+    margin: 15px 0;
+    margin-left: 0 !important;
+  }
+
+  .nav-menu a {
+    display: block;
+    padding: 10px 0;
+    font-size: 1.1rem;
   }
 
   .mobile-menu {
     display: block;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--secondary-color);
+  }
+
+  /* Hamburger transition to X when menu is active */
+  .mobile-menu i {
+    transition: transform 0.25s ease;
+  }
+
+  .mobile-menu.active i {
+    transform: rotate(90deg);
+  }
+
+  .mobile-menu.active i::before {
+    content: "\f00d"; /* FontAwesome Close Icon */
+  }
+
+  /* Footer mobile alignment */
+  .footer {
+    padding-top: 50px;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    text-align: center;
+  }
+
+  .footer-contact ul li {
+    justify-content: center;
+  }
+
+  .footer h4::after {
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
-}
+
 body {
   overflow-x: hidden;
 }
-*{
+
+img, video, iframe, svg {
   max-width: 100%;
-  box-sizing: border-box;
+  height: auto;
 }

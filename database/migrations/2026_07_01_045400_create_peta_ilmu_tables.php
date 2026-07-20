@@ -12,23 +12,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // 1. Admins
+        
         if (!Schema::hasTable('admins')) {
             Schema::create('admins', function (Blueprint $table) {
-                $table->integer('id', true); // auto-increment primary key
+                $table->integer('id', true); 
                 $table->string('username', 50)->unique();
                 $table->string('password', 255);
                 $table->timestamp('created_at')->useCurrent();
             });
 
-            // Insert default admin
+            
             DB::table('admins')->insert([
                 'username' => 'admin',
-                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi' // admin123
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi' 
             ]);
         }
 
-        // 2. Programs
+        
         if (!Schema::hasTable('programs')) {
             Schema::create('programs', function (Blueprint $table) {
                 $table->bigIncrements('id');
@@ -45,7 +45,7 @@ return new class extends Migration
             });
         }
 
-        // 3. Program Features
+        
         if (!Schema::hasTable('program_features')) {
             Schema::create('program_features', function (Blueprint $table) {
                 $table->bigIncrements('id');
@@ -56,7 +56,7 @@ return new class extends Migration
             });
         }
 
-        // 4. Program Packages
+        
         if (!Schema::hasTable('program_packages')) {
             Schema::create('program_packages', function (Blueprint $table) {
                 $table->bigIncrements('id');
@@ -71,7 +71,7 @@ return new class extends Migration
             });
         }
 
-        // 5. Package Prices
+        
         if (!Schema::hasTable('package_prices')) {
             Schema::create('package_prices', function (Blueprint $table) {
                 $table->bigIncrements('id');
@@ -83,7 +83,7 @@ return new class extends Migration
             });
         }
 
-        // 6. Program Benefits
+        
         if (!Schema::hasTable('program_benefits')) {
             Schema::create('program_benefits', function (Blueprint $table) {
                 $table->integer('id', true);
@@ -92,7 +92,7 @@ return new class extends Migration
                 $table->text('description')->nullable();
             });
 
-            // Default program benefits
+            
             DB::table('program_benefits')->insert([
                 ['icon' => 'fas fa-chalkboard-teacher', 'title' => 'Pengajar Berpengalaman', 'description' => 'Tim pengajar profesional dan berpengalaman di bidangnya'],
                 ['icon' => 'fas fa-users', 'title' => 'Kelas Kecil', 'description' => 'Kelas dengan jumlah siswa terbatas untuk pembelajaran lebih fokus'],
@@ -101,7 +101,7 @@ return new class extends Migration
             ]);
         }
 
-        // 7. Program FAQs
+        
         if (!Schema::hasTable('program_faqs')) {
             Schema::create('program_faqs', function (Blueprint $table) {
                 $table->integer('id', true);
@@ -109,7 +109,7 @@ return new class extends Migration
                 $table->text('answer');
             });
 
-            // Default program FAQs
+            
             DB::table('program_faqs')->insert([
                 ['question' => 'Bagaimana cara mendaftar?', 'answer' => 'Anda dapat mendaftar melalui halaman pendaftaran atau datang langsung ke lokasi kami.'],
                 ['question' => 'Berapa biaya pendaftaran?', 'answer' => 'Biaya pendaftaran bervariasi tergantung program yang dipilih. Silakan lihat detail program untuk informasi lebih lanjut.'],
@@ -117,7 +117,7 @@ return new class extends Migration
             ]);
         }
 
-        // 8. Pendaftaran
+        
         if (!Schema::hasTable('pendaftaran')) {
             Schema::create('pendaftaran', function (Blueprint $table) {
                 $table->bigIncrements('id');
@@ -147,7 +147,7 @@ return new class extends Migration
             });
         }
 
-        // 9. Registration Subjects
+        
         if (!Schema::hasTable('registration_subjects')) {
             Schema::create('registration_subjects', function (Blueprint $table) {
                 $table->bigIncrements('id');
@@ -158,7 +158,7 @@ return new class extends Migration
             });
         }
 
-        // 10. Organisasi Info
+        
         if (!Schema::hasTable('organisasi_info')) {
             Schema::create('organisasi_info', function (Blueprint $table) {
                 $table->integer('id', true);
@@ -167,7 +167,7 @@ return new class extends Migration
                 $table->integer('jumlah_siswa_awal')->nullable();
             });
 
-            // Default
+            
             DB::table('organisasi_info')->insert([
                 'visi' => 'Menjadi lembaga bimbingan belajar terbaik yang membantu siswa mencapai potensi maksimal mereka.',
                 'tahun_berdiri' => 2010,
@@ -175,7 +175,7 @@ return new class extends Migration
             ]);
         }
 
-        // 11. Sejarah Organisasi
+        
         if (!Schema::hasTable('sejarah_organisasi')) {
             Schema::create('sejarah_organisasi', function (Blueprint $table) {
                 $table->integer('id', true);
@@ -184,7 +184,7 @@ return new class extends Migration
             });
         }
 
-        // 12. Misi Organisasi
+        
         if (!Schema::hasTable('misi_organisasi')) {
             Schema::create('misi_organisasi', function (Blueprint $table) {
                 $table->integer('id', true);
@@ -193,7 +193,7 @@ return new class extends Migration
             });
         }
 
-        // 13. Nilai Organisasi
+        
         if (!Schema::hasTable('nilai_organisasi')) {
             Schema::create('nilai_organisasi', function (Blueprint $table) {
                 $table->integer('id', true);
@@ -203,7 +203,7 @@ return new class extends Migration
             });
         }
 
-        // 14. Struktur Organisasi
+        
         if (!Schema::hasTable('struktur_organisasi')) {
             Schema::create('struktur_organisasi', function (Blueprint $table) {
                 $table->integer('id', true);
@@ -215,7 +215,7 @@ return new class extends Migration
             });
         }
 
-        // 15. Mata Pelajaran
+        
         if (!Schema::hasTable('mata_pelajaran')) {
             Schema::create('mata_pelajaran', function (Blueprint $table) {
                 $table->integer('id', true);
@@ -223,7 +223,7 @@ return new class extends Migration
                 $table->string('nama', 255);
             });
 
-            // Default subjects
+            
             DB::table('mata_pelajaran')->insert([
                 ['kode' => 'MTK', 'nama' => 'Matematika'],
                 ['kode' => 'BID', 'nama' => 'Bahasa Indonesia'],
@@ -240,7 +240,7 @@ return new class extends Migration
             ]);
         }
 
-        // 16. Tim Pengajar
+        
         if (!Schema::hasTable('tim_pengajar')) {
             Schema::create('tim_pengajar', function (Blueprint $table) {
                 $table->integer('id', true);
@@ -254,7 +254,7 @@ return new class extends Migration
             });
         }
 
-        // 17. Kontak Info
+        
         if (!Schema::hasTable('kontak_info')) {
             Schema::create('kontak_info', function (Blueprint $table) {
                 $table->integer('id', true);
@@ -265,7 +265,7 @@ return new class extends Migration
             });
         }
 
-        // 18. Students
+        
         if (!Schema::hasTable('students')) {
             Schema::create('students', function (Blueprint $table) {
                 $table->integer('id', true);
@@ -278,18 +278,18 @@ return new class extends Migration
                 $table->timestamp('created_at')->useCurrent();
             });
 
-            // Insert default student
+            
             DB::table('students')->insert([
                 'username' => 'siswa',
                 'nama' => 'Siswa Demo',
                 'email' => 'siswa@petailmu.local',
-                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // let's set it to standard hash of "siswa123"
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 
                 'jenjang' => 'sd',
                 'kelas' => '5'
             ]);
         }
 
-        // 19. Learning Data
+        
         if (!Schema::hasTable('learning_data')) {
             Schema::create('learning_data', function (Blueprint $table) {
                 $table->integer('id', true);

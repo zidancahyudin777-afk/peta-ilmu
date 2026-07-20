@@ -80,6 +80,21 @@
         .btn-primary-custom:active {
             transform: translateY(0);
         }
+        @media (max-width: 576px) {
+            .input-container {
+                padding: 15px;
+            }
+            .input-header {
+                margin-bottom: 20px;
+                padding-bottom: 15px;
+            }
+            .input-header h2 {
+                font-size: 18px;
+            }
+            .input-header p {
+                font-size: 12px;
+            }
+        }
     </style>
 @endsection
 
